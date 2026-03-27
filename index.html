@@ -2,7 +2,7 @@
 <!--
 Project: Force Cheng × FALO Tools
 Tool: QR Code Generator
-Version: v101
+Version: v102
 Last Updated: 2026-03-28
 Copyright: © 2026 Force Cheng × FALO. All rights reserved.
 Website: https://force.formosa-ai.com
@@ -17,21 +17,21 @@ Design:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FALO QR Code Generator v101 | 完整功能單檔工具 | Force Cheng × FALO</title>
-  <meta name="description" content="FALO QR Code Generator v101 是可本機直接開啟的單檔 HTML 工具，支援繁中、簡中、英文、日文切換，提供 Logo、色彩、尺寸與 PNG、JPG、SVG、PDF 匯出。">
+  <title>FALO QR Code Generator v102 | 完整功能單檔工具 | Force Cheng × FALO</title>
+  <meta name="description" content="FALO QR Code Generator v102 是可本機直接開啟的單檔 HTML 工具，支援繁中、簡中、英文、日文切換，提供 Logo、色彩、尺寸與 PNG、JPG、SVG、PDF 匯出。">
   <meta name="keywords" content="QRCode, QR Code Generator, 單檔 HTML, Logo QRCode, GitHub Pages, local-first, mobile-first, Force Cheng, FALO, Tools Area">
   <meta name="author" content="Force Cheng × FALO">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#d8f1dc">
-  <link rel="canonical" href="https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v101.html">
+  <link rel="canonical" href="https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v102.html">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="FALO QR Code Generator v101 | 完整功能單檔工具">
+  <meta property="og:title" content="FALO QR Code Generator v102 | 完整功能單檔工具">
   <meta property="og:description" content="可本機直接打開、可部署 GitHub Pages 的單檔 QR Code 工具，支援多語系、Logo、色彩、尺寸與 PNG / JPG / SVG / PDF 下載。">
-  <meta property="og:url" content="https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v101.html">
+  <meta property="og:url" content="https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v102.html">
   <meta property="og:site_name" content="Force Cheng × FALO Tools">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="FALO QR Code Generator v101 | 完整功能單檔工具">
+  <meta name="twitter:title" content="FALO QR Code Generator v102 | 完整功能單檔工具">
   <meta name="twitter:description" content="極簡入口、完整功能的單檔 QR Code 工具，支援多語系、本機開啟、Logo 與多格式下載。">
   <script id="structured-data" type="application/ld+json">
     {
@@ -40,7 +40,7 @@ Design:
       "name": "FALO QR Code Generator",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
-      "url": "https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v101.html",
+      "url": "https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v102.html",
       "description": "單檔 HTML 的多語系 QR Code 工具，支援內容輸入、Logo、顏色調整、尺寸調整，以及 PNG、JPG、SVG、PDF 匯出。",
       "author": {
         "@type": "Organization",
@@ -474,7 +474,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
   <main class="page">
     <section class="hero">
       <div class="hero-head">
-        <div class="eyebrow" data-i18n="badge">Single File HTML · v101</div>
+        <div class="eyebrow" data-i18n="badge">Single File HTML · v102</div>
         <div class="choice-group">
           <div class="lang-note" data-i18n="languageLabel">語言</div>
           <div class="choice-row" id="language-switcher">
@@ -500,7 +500,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         <div class="controls">
           <div class="field-group">
             <label for="qr-text" data-i18n="contentLabel">內容</label>
-            <textarea id="qr-text" data-i18n-placeholder="contentPlaceholder">https://force.formosa-ai.com</textarea>
+            <textarea id="qr-text" data-i18n-placeholder="contentPlaceholder">https://www.google.com/</textarea>
             <div class="field-note" data-i18n="contentNote">最常見用途就是網址。先做這個，就已經能拿去展示與分享。</div>
           </div>
 
@@ -508,11 +508,11 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
             <div class="field-grid">
               <div>
                 <label for="foreground" data-i18n="foregroundLabel">前景色</label>
-                <input id="foreground" type="color" value="#6c59b2">
+                <input id="foreground" type="color" value="#333333">
               </div>
               <div>
                 <label for="background" data-i18n="backgroundLabel">背景色</label>
-                <input id="background" type="color" value="#fffdf6">
+                <input id="background" type="color" value="#ffffff">
               </div>
             </div>
           </div>
@@ -522,7 +522,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
               <label for="size" data-i18n="sizeLabel">尺寸</label>
               <span id="size-value">400 px</span>
             </div>
-            <input id="size" type="range" min="180" max="720" step="20" value="400">
+            <input id="size" type="range" min="180" max="720" step="20" value="320">
           </div>
 
           <div class="field-group">
@@ -586,7 +586,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
               </div>
               <div>
                 <label for="logo-text-color" data-i18n="logoTextColorLabel">文字顏色</label>
-                <input id="logo-text-color" type="color" value="#6c59b2">
+                <input id="logo-text-color" type="color" value="#333333">
               </div>
             </div>
             <div class="inline-meta">
@@ -618,7 +618,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         </div>
         <div class="preview-meta">
           <div class="preview-label" data-i18n="previewTextLabel">QRCode 文字</div>
-          <div class="preview-text" id="preview-text">https://force.formosa-ai.com</div>
+          <div class="preview-text" id="preview-text">https://www.google.com/</div>
           <button class="inline-action" id="refresh-btn" type="button" data-i18n="refreshButton">點我手動刷新</button>
         </div>
         <div class="status" id="status">已就緒。</div>
@@ -630,7 +630,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
     <span data-i18n="footerCopyright">© 2026 Force Cheng × FALO. All rights reserved.</span><br>
     <span data-i18n="footerWebsiteLabel">Force Cheng Web :</span>
     <a class="footer-link" href="https://force.formosa-ai.com">https://force.formosa-ai.com</a><br>
-    <span data-i18n="footerVersion">Version: v101</span>
+    <span data-i18n="footerVersion">Version: v102</span>
   </footer>
 
   <script>
@@ -681,14 +681,14 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
     const themeColor = document.querySelector('meta[name="theme-color"]');
 
     const defaults = {
-      text: "https://force.formosa-ai.com",
-      foreground: "#6c59b2",
-      background: "#fffdf6",
-      size: 400,
+      text: "https://www.google.com/",
+      foreground: "#333333",
+      background: "#ffffff",
+      size: 320,
       filename: "",
       logoScale: 20,
       logoTextSize: 100,
-      logoTextColor: "#6c59b2",
+      logoTextColor: "#333333",
       logoMode: "image",
       logoShape: "rect",
       logoLine1: "",
@@ -710,16 +710,16 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
       "zh-TW": {
         htmlLang: "zh-Hant",
         ogLocale: "zh_TW",
-        title: "FALO QRCode 產生器 v101 | 完整功能單檔工具 | Force Cheng × FALO",
-        description: "FALO QRCode 產生器 v101 是可本機直接開啟的單檔 HTML 工具，支援繁中、簡中、英文、日文切換，提供 Logo、色彩、尺寸與 PNG、JPG、SVG、PDF 匯出。",
+        title: "FALO QRCode 產生器 v102 | 完整功能單檔工具 | Force Cheng × FALO",
+        description: "FALO QRCode 產生器 v102 是可本機直接開啟的單檔 HTML 工具，支援繁中、簡中、英文、日文切換，提供 Logo、色彩、尺寸與 PNG、JPG、SVG、PDF 匯出。",
         keywords: "QRCode, QRCode 產生器, 單檔 HTML, Logo QRCode, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
         author: "Force Cheng × FALO",
         robots: "index, follow, max-image-preview:large",
-        ogTitle: "FALO QRCode 產生器 v101 | 完整功能單檔工具",
+        ogTitle: "FALO QRCode 產生器 v102 | 完整功能單檔工具",
         ogDescription: "可本機直接打開、可部署 GitHub Pages 的單檔 QRCode 工具，支援多語系、Logo、色彩、尺寸與 PNG / JPG / SVG / PDF 下載。",
-        twitterTitle: "FALO QRCode 產生器 v101 | 完整功能單檔工具",
+        twitterTitle: "FALO QRCode 產生器 v102 | 完整功能單檔工具",
         twitterDescription: "極簡入口、完整功能的單檔 QRCode 工具，支援多語系、本機開啟、Logo 與多格式下載。",
-        badge: "Single File HTML · v101",
+        badge: "Single File HTML · v102",
         languageLabel: "語言",
         heroTitle: "QRCode 產生器",
         heroSubtitle: "FALO 模型菜｜單一 HTML，可本地執行，也可直接部署",
@@ -735,7 +735,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         sizeLabel: "尺寸",
         sizeUnit: "px",
         filenameLabel: "輸出檔名",
-        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenamePlaceholder: "falo-qrcode-v102-202603281130",
         filenameNote: "預設會帶入版本與時間，你也可以自行改名。",
         logoLabel: "Logo",
         logoModeLabel: "Logo 模式",
@@ -771,7 +771,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         refreshButton: "點我手動刷新",
         footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
         footerWebsiteLabel: "Force Cheng Web :",
-        footerVersion: "Version: v101",
+        footerVersion: "Version: v102",
         statusReady: "已就緒。",
         statusRendering: "正在更新預覽…",
         statusUpdated: "已更新。",
@@ -786,16 +786,16 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
       "zh-CN": {
         htmlLang: "zh-Hans",
         ogLocale: "zh_CN",
-        title: "FALO QRCode 生成器 v101 | 完整功能单文件工具 | Force Cheng × FALO",
-        description: "FALO QRCode 生成器 v101 是可本地直接打开的单文件 HTML 工具，支持繁中、简中、英文、日文切换，并提供 Logo、颜色、尺寸与 PNG、JPG、SVG、PDF 导出。",
+        title: "FALO QRCode 生成器 v102 | 完整功能单文件工具 | Force Cheng × FALO",
+        description: "FALO QRCode 生成器 v102 是可本地直接打开的单文件 HTML 工具，支持繁中、简中、英文、日文切换，并提供 Logo、颜色、尺寸与 PNG、JPG、SVG、PDF 导出。",
         keywords: "QRCode, 二维码生成器, 单文件 HTML, Logo QRCode, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
         author: "Force Cheng × FALO",
         robots: "index, follow, max-image-preview:large",
-        ogTitle: "FALO QRCode 生成器 v101 | 完整功能单文件工具",
+        ogTitle: "FALO QRCode 生成器 v102 | 完整功能单文件工具",
         ogDescription: "可本地直接打开、可部署 GitHub Pages 的单文件 QRCode 工具，支持多语言、Logo、颜色、尺寸与 PNG / JPG / SVG / PDF 下载。",
-        twitterTitle: "FALO QRCode 生成器 v101 | 完整功能单文件工具",
+        twitterTitle: "FALO QRCode 生成器 v102 | 完整功能单文件工具",
         twitterDescription: "极简入口、完整功能的单文件 QRCode 工具，支持多语言、本地打开、Logo 与多格式下载。",
-        badge: "Single File HTML · v101",
+        badge: "Single File HTML · v102",
         languageLabel: "语言",
         heroTitle: "QRCode 生成器",
         heroSubtitle: "FALO 模型菜｜单一 HTML，可本地运行，也可直接部署",
@@ -811,7 +811,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         sizeLabel: "尺寸",
         sizeUnit: "px",
         filenameLabel: "输出文件名",
-        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenamePlaceholder: "falo-qrcode-v102-202603281130",
         filenameNote: "默认会带入版本与时间，你也可以自行改名。",
         logoLabel: "Logo",
         logoModeLabel: "Logo 模式",
@@ -847,7 +847,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         refreshButton: "手动刷新",
         footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
         footerWebsiteLabel: "Force Cheng Web :",
-        footerVersion: "Version: v101",
+        footerVersion: "Version: v102",
         statusReady: "已就绪。",
         statusRendering: "正在更新预览…",
         statusUpdated: "已更新。",
@@ -862,16 +862,16 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
       "en": {
         htmlLang: "en",
         ogLocale: "en_US",
-        title: "FALO QR Code Generator v101 | Full-Featured Single-File Tool | Force Cheng × FALO",
-        description: "FALO QR Code Generator v101 is a local-first single-file HTML tool with Traditional Chinese, Simplified Chinese, English, and Japanese support. It includes logo, colors, size controls, and PNG, JPG, SVG, PDF export.",
+        title: "FALO QR Code Generator v102 | Full-Featured Single-File Tool | Force Cheng × FALO",
+        description: "FALO QR Code Generator v102 is a local-first single-file HTML tool with Traditional Chinese, Simplified Chinese, English, and Japanese support. It includes logo, colors, size controls, and PNG, JPG, SVG, PDF export.",
         keywords: "QR Code, QR Code Generator, single-file HTML, Logo QR Code, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
         author: "Force Cheng × FALO",
         robots: "index, follow, max-image-preview:large",
-        ogTitle: "FALO QR Code Generator v101 | Full-Featured Single-File Tool",
+        ogTitle: "FALO QR Code Generator v102 | Full-Featured Single-File Tool",
         ogDescription: "A local-first QR Code tool you can open directly or deploy to GitHub Pages, with multilingual UI, logo support, color controls, size controls, and PNG / JPG / SVG / PDF export.",
-        twitterTitle: "FALO QR Code Generator v101 | Full-Featured Single-File Tool",
+        twitterTitle: "FALO QR Code Generator v102 | Full-Featured Single-File Tool",
         twitterDescription: "A minimal entry with full QR capabilities: multilingual UI, logos, and multi-format downloads in one single-file tool.",
-        badge: "Single File HTML · v101",
+        badge: "Single File HTML · v102",
         languageLabel: "Language",
         heroTitle: "QR Code Generator",
         heroSubtitle: "FALO Model Basics | Single HTML, runnable locally, deployable directly",
@@ -887,7 +887,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         sizeLabel: "Size",
         sizeUnit: "px",
         filenameLabel: "Output Filename",
-        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenamePlaceholder: "falo-qrcode-v102-202603281130",
         filenameNote: "The default filename includes the version and timestamp, and you can rename it anytime.",
         logoLabel: "Logo",
         logoModeLabel: "Logo Mode",
@@ -923,7 +923,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         refreshButton: "Refresh manually",
         footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
         footerWebsiteLabel: "Force Cheng Web :",
-        footerVersion: "Version: v101",
+        footerVersion: "Version: v102",
         statusReady: "Ready.",
         statusRendering: "Updating preview...",
         statusUpdated: "Updated.",
@@ -938,16 +938,16 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
       "ja": {
         htmlLang: "ja",
         ogLocale: "ja_JP",
-        title: "FALO QRコード生成ツール v101 | 完全機能の単一ファイルツール | Force Cheng × FALO",
-        description: "FALO QRコード生成ツール v101 は、ローカルで直接開ける単一 HTML ツールです。繁体字中国語、簡体字中国語、英語、日本語に対応し、Logo、色、サイズ、PNG、JPG、SVG、PDF 出力を提供します。",
+        title: "FALO QRコード生成ツール v102 | 完全機能の単一ファイルツール | Force Cheng × FALO",
+        description: "FALO QRコード生成ツール v102 は、ローカルで直接開ける単一 HTML ツールです。繁体字中国語、簡体字中国語、英語、日本語に対応し、Logo、色、サイズ、PNG、JPG、SVG、PDF 出力を提供します。",
         keywords: "QRコード, QR Code Generator, 単一HTML, Logo QR, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
         author: "Force Cheng × FALO",
         robots: "index, follow, max-image-preview:large",
-        ogTitle: "FALO QRコード生成ツール v101 | 完全機能の単一ファイルツール",
+        ogTitle: "FALO QRコード生成ツール v102 | 完全機能の単一ファイルツール",
         ogDescription: "ローカルで直接開けて GitHub Pages にも配置できる単一ファイルの QRコードツール。多言語 UI、Logo、色調整、サイズ調整、PNG / JPG / SVG / PDF 出力に対応。",
-        twitterTitle: "FALO QRコード生成ツール v101 | 完全機能の単一ファイルツール",
+        twitterTitle: "FALO QRコード生成ツール v102 | 完全機能の単一ファイルツール",
         twitterDescription: "入口はシンプル、機能はフル。多言語、Logo、複数形式ダウンロードに対応した単一ファイルの QRコードツール。",
-        badge: "Single File HTML · v101",
+        badge: "Single File HTML · v102",
         languageLabel: "言語",
         heroTitle: "QRコード生成ツール",
         heroSubtitle: "FALO モデル菜｜単一 HTML、ローカル実行も直接配置も可能",
@@ -963,7 +963,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         sizeLabel: "サイズ",
         sizeUnit: "px",
         filenameLabel: "出力ファイル名",
-        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenamePlaceholder: "falo-qrcode-v102-202603281130",
         filenameNote: "初期ファイル名にはバージョンと時刻が自動で入ります。自由に変更できます。",
         logoLabel: "Logo",
         logoModeLabel: "Logo モード",
@@ -999,7 +999,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
         refreshButton: "手動で更新",
         footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
         footerWebsiteLabel: "Force Cheng Web :",
-        footerVersion: "Version: v101",
+        footerVersion: "Version: v102",
         statusReady: "準備完了。",
         statusRendering: "プレビューを更新中...",
         statusUpdated: "更新しました。",
@@ -1029,13 +1029,19 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
       };
 
       return [
-        "falo-qrcode-v101-",
+        "falo-qrcode-v102-",
         now.getFullYear(),
         pad(now.getMonth() + 1),
         pad(now.getDate()),
         pad(now.getHours()),
         pad(now.getMinutes())
       ].join("");
+    }
+
+    function getResponsiveDefaultSize() {
+      const viewportWidth = Math.max(320, window.innerWidth || 0);
+      const estimatedPadding = viewportWidth < 860 ? 64 : 120;
+      return Math.max(180, Math.min(420, Math.floor(viewportWidth - estimatedPadding)));
     }
 
     function sanitizeFilename(rawName) {
@@ -1563,7 +1569,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
       textInput.value = defaults.text;
       foregroundInput.value = defaults.foreground;
       backgroundInput.value = defaults.background;
-      sizeInput.value = defaults.size;
+      sizeInput.value = getResponsiveDefaultSize();
       filenameInput.value = getDefaultFilename();
       logoScaleInput.value = defaults.logoScale;
       logoTextSizeInput.value = defaults.logoTextSize;
@@ -1664,6 +1670,7 @@ var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof 
       }
 
       filenameInput.value = getDefaultFilename();
+      sizeInput.value = getResponsiveDefaultSize();
       setChoiceValue("logo-mode", defaults.logoMode);
       setChoiceValue("logo-shape", defaults.logoShape);
       setChoiceValue("logo-layout", defaults.logoLayout);
