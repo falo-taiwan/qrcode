@@ -1,0 +1,1681 @@
+<!doctype html>
+<!--
+Project: Force Cheng × FALO Tools
+Tool: QR Code Generator
+Version: v101
+Last Updated: 2026-03-28
+Copyright: © 2026 Force Cheng × FALO. All rights reserved.
+Website: https://force.formosa-ai.com
+
+Design:
+- Single-file first
+- Local-first
+- Mobile-first
+- GitHub Pages ready
+-->
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FALO QR Code Generator v101 | 完整功能單檔工具 | Force Cheng × FALO</title>
+  <meta name="description" content="FALO QR Code Generator v101 是可本機直接開啟的單檔 HTML 工具，支援繁中、簡中、英文、日文切換，提供 Logo、色彩、尺寸與 PNG、JPG、SVG、PDF 匯出。">
+  <meta name="keywords" content="QRCode, QR Code Generator, 單檔 HTML, Logo QRCode, GitHub Pages, local-first, mobile-first, Force Cheng, FALO, Tools Area">
+  <meta name="author" content="Force Cheng × FALO">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#d8f1dc">
+  <link rel="canonical" href="https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v101.html">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FALO QR Code Generator v101 | 完整功能單檔工具">
+  <meta property="og:description" content="可本機直接打開、可部署 GitHub Pages 的單檔 QR Code 工具，支援多語系、Logo、色彩、尺寸與 PNG / JPG / SVG / PDF 下載。">
+  <meta property="og:url" content="https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v101.html">
+  <meta property="og:site_name" content="Force Cheng × FALO Tools">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FALO QR Code Generator v101 | 完整功能單檔工具">
+  <meta name="twitter:description" content="極簡入口、完整功能的單檔 QR Code 工具，支援多語系、本機開啟、Logo 與多格式下載。">
+  <script id="structured-data" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "FALO QR Code Generator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "url": "https://force.formosa-ai.com/tools/qrcode/falo-qrcode-v101.html",
+      "description": "單檔 HTML 的多語系 QR Code 工具，支援內容輸入、Logo、顏色調整、尺寸調整，以及 PNG、JPG、SVG、PDF 匯出。",
+      "author": {
+        "@type": "Organization",
+        "name": "Force Cheng × FALO"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Force Cheng × FALO"
+      },
+      "inLanguage": "zh-Hant",
+      "keywords": "QRCode, 單檔 HTML, GitHub Pages, local-first, mobile-first"
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #f8f7ff;
+      --panel: rgba(255, 255, 255, 0.84);
+      --panel-strong: rgba(255, 255, 255, 0.96);
+      --line: rgba(113, 101, 174, 0.16);
+      --text: #322c48;
+      --muted: #6f6a88;
+      --brand: #7cc8a2;
+      --brand-deep: #6c59b2;
+      --brand-soft: rgba(124, 200, 162, 0.18);
+      --accent-yellow: #f6e59a;
+      --accent-purple: rgba(155, 135, 245, 0.18);
+      --accent-green: rgba(124, 200, 162, 0.16);
+      --shadow: 0 22px 52px rgba(104, 90, 160, 0.12);
+      --max-width: 960px;
+      --radius: 26px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: "Iansui", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(246, 229, 154, 0.55), transparent 30%),
+        radial-gradient(circle at top right, rgba(155, 135, 245, 0.22), transparent 26%),
+        radial-gradient(circle at 20% 80%, rgba(124, 200, 162, 0.22), transparent 24%),
+        linear-gradient(180deg, #fcfbff 0%, #f1fbf3 100%);
+    }
+
+    .page {
+      width: min(var(--max-width), calc(100% - 20px));
+      margin: 0 auto;
+      padding: 18px 0 32px;
+    }
+
+    .hero,
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      gap: 14px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .hero-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(34px, 8vw, 56px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .lead {
+      color: var(--brand-deep);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .hero-copy,
+    .helper,
+    .status,
+    .field-note {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    .panel h2 {
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .controls {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    textarea,
+    input[type="text"],
+    input[type="file"],
+    input[type="color"],
+    input[type="range"] {
+      width: 100%;
+      font: inherit;
+    }
+
+    textarea,
+    input[type="text"] {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 108px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    input[type="file"] {
+      padding: 10px 12px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    input[type="color"] {
+      height: 48px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    input[type="range"] {
+      accent-color: var(--brand);
+    }
+
+    .inline-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .choice-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .choice-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .lang-note {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .choice-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .choice-button.is-active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+      border-color: transparent;
+      box-shadow: 0 12px 24px rgba(108, 89, 178, 0.18);
+    }
+
+    .button,
+    .button-secondary,
+    .button-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 16px;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 160ms ease;
+      text-decoration: none;
+    }
+
+    .button:hover,
+    .button-secondary:hover,
+    .button-ghost:hover {
+      transform: translateY(-1px);
+    }
+
+    .button {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+      box-shadow: 0 14px 28px rgba(108, 89, 178, 0.22);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: #fff;
+      border-color: var(--line);
+    }
+
+    .button-ghost {
+      color: var(--brand-deep);
+      background: rgba(246, 229, 154, 0.28);
+      border-color: rgba(246, 229, 154, 0.5);
+    }
+
+    .preview-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .preview-meta {
+      display: grid;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .preview-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+    }
+
+    .preview-text {
+      color: var(--text);
+      line-height: 1.7;
+      word-break: break-word;
+    }
+
+    .inline-action {
+      width: fit-content;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--brand-deep);
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .preview-card {
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(45deg, rgba(108, 89, 178, 0.04) 25%, transparent 25%, transparent 75%, rgba(108, 89, 178, 0.04) 75%),
+        linear-gradient(45deg, rgba(124, 200, 162, 0.05) 25%, transparent 25%, transparent 75%, rgba(124, 200, 162, 0.05) 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+    }
+
+    canvas {
+      width: min(100%, 420px);
+      height: auto;
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 18px 42px rgba(108, 89, 178, 0.14);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      width: min(var(--max-width), calc(100% - 20px));
+      margin: 0 auto;
+      padding: 0 0 28px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .chip {
+      display: inline-flex;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media (min-width: 860px) {
+      .page {
+        width: min(var(--max-width), calc(100% - 40px));
+        padding-top: 32px;
+      }
+
+      footer {
+        width: min(var(--max-width), calc(100% - 40px));
+      }
+
+      .layout {
+        grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .field-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+  <script id="qr-lib">
+/**
+ * Skipped minification because the original files appears to be already minified.
+ * Original file: /npm/qrcode@1.5.1/build/qrcode.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+var QRCode=function(t){"use strict";var r,e=function(){return"function"==typeof Promise&&Promise.prototype&&Promise.prototype.then},n=[0,26,44,70,100,134,172,196,242,292,346,404,466,532,581,655,733,815,901,991,1085,1156,1258,1364,1474,1588,1706,1828,1921,2051,2185,2323,2465,2611,2761,2876,3034,3196,3362,3532,3706],o=function(t){if(!t)throw new Error('"version" cannot be null or undefined');if(t<1||t>40)throw new Error('"version" should be in range from 1 to 40');return 4*t+17},a=function(t){return n[t]},i=function(t){for(var r=0;0!==t;)r++,t>>>=1;return r},u=function(t){if("function"!=typeof t)throw new Error('"toSJISFunc" is not a valid function.');r=t},s=function(){return void 0!==r},f=function(t){return r(t)};function h(t,r){return t(r={exports:{}},r.exports),r.exports}var c=h((function(t,r){r.L={bit:1},r.M={bit:0},r.Q={bit:3},r.H={bit:2},r.isValid=function(t){return t&&void 0!==t.bit&&t.bit>=0&&t.bit<4},r.from=function(t,e){if(r.isValid(t))return t;try{return function(t){if("string"!=typeof t)throw new Error("Param is not a string");switch(t.toLowerCase()){case"l":case"low":return r.L;case"m":case"medium":return r.M;case"q":case"quartile":return r.Q;case"h":case"high":return r.H;default:throw new Error("Unknown EC Level: "+t)}}(t)}catch(t){return e}}}));function g(){this.buffer=[],this.length=0}c.L,c.M,c.Q,c.H,c.isValid,g.prototype={get:function(t){var r=Math.floor(t/8);return 1==(this.buffer[r]>>>7-t%8&1)},put:function(t,r){for(var e=0;e<r;e++)this.putBit(1==(t>>>r-e-1&1))},getLengthInBits:function(){return this.length},putBit:function(t){var r=Math.floor(this.length/8);this.buffer.length<=r&&this.buffer.push(0),t&&(this.buffer[r]|=128>>>this.length%8),this.length++}};var d=g;function l(t){if(!t||t<1)throw new Error("BitMatrix size must be defined and greater than 0");this.size=t,this.data=new Uint8Array(t*t),this.reservedBit=new Uint8Array(t*t)}l.prototype.set=function(t,r,e,n){var o=t*this.size+r;this.data[o]=e,n&&(this.reservedBit[o]=!0)},l.prototype.get=function(t,r){return this.data[t*this.size+r]},l.prototype.xor=function(t,r,e){this.data[t*this.size+r]^=e},l.prototype.isReserved=function(t,r){return this.reservedBit[t*this.size+r]};var v=l,p=h((function(t,r){var e=o;r.getRowColCoords=function(t){if(1===t)return[];for(var r=Math.floor(t/7)+2,n=e(t),o=145===n?26:2*Math.ceil((n-13)/(2*r-2)),a=[n-7],i=1;i<r-1;i++)a[i]=a[i-1]-o;return a.push(6),a.reverse()},r.getPositions=function(t){for(var e=[],n=r.getRowColCoords(t),o=n.length,a=0;a<o;a++)for(var i=0;i<o;i++)0===a&&0===i||0===a&&i===o-1||a===o-1&&0===i||e.push([n[a],n[i]]);return e}}));p.getRowColCoords,p.getPositions;var w=o,m=function(t){var r=w(t);return[[0,0],[r-7,0],[0,r-7]]},E=h((function(t,r){r.Patterns={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7};var e=3,n=3,o=40,a=10;function i(t,e,n){switch(t){case r.Patterns.PATTERN000:return(e+n)%2==0;case r.Patterns.PATTERN001:return e%2==0;case r.Patterns.PATTERN010:return n%3==0;case r.Patterns.PATTERN011:return(e+n)%3==0;case r.Patterns.PATTERN100:return(Math.floor(e/2)+Math.floor(n/3))%2==0;case r.Patterns.PATTERN101:return e*n%2+e*n%3==0;case r.Patterns.PATTERN110:return(e*n%2+e*n%3)%2==0;case r.Patterns.PATTERN111:return(e*n%3+(e+n)%2)%2==0;default:throw new Error("bad maskPattern:"+t)}}r.isValid=function(t){return null!=t&&""!==t&&!isNaN(t)&&t>=0&&t<=7},r.from=function(t){return r.isValid(t)?parseInt(t,10):void 0},r.getPenaltyN1=function(t){for(var r=t.size,n=0,o=0,a=0,i=null,u=null,s=0;s<r;s++){o=a=0,i=u=null;for(var f=0;f<r;f++){var h=t.get(s,f);h===i?o++:(o>=5&&(n+=e+(o-5)),i=h,o=1),(h=t.get(f,s))===u?a++:(a>=5&&(n+=e+(a-5)),u=h,a=1)}o>=5&&(n+=e+(o-5)),a>=5&&(n+=e+(a-5))}return n},r.getPenaltyN2=function(t){for(var r=t.size,e=0,o=0;o<r-1;o++)for(var a=0;a<r-1;a++){var i=t.get(o,a)+t.get(o,a+1)+t.get(o+1,a)+t.get(o+1,a+1);4!==i&&0!==i||e++}return e*n},r.getPenaltyN3=function(t){for(var r=t.size,e=0,n=0,a=0,i=0;i<r;i++){n=a=0;for(var u=0;u<r;u++)n=n<<1&2047|t.get(i,u),u>=10&&(1488===n||93===n)&&e++,a=a<<1&2047|t.get(u,i),u>=10&&(1488===a||93===a)&&e++}return e*o},r.getPenaltyN4=function(t){for(var r=0,e=t.data.length,n=0;n<e;n++)r+=t.data[n];return Math.abs(Math.ceil(100*r/e/5)-10)*a},r.applyMask=function(t,r){for(var e=r.size,n=0;n<e;n++)for(var o=0;o<e;o++)r.isReserved(o,n)||r.xor(o,n,i(t,o,n))},r.getBestMask=function(t,e){for(var n=Object.keys(r.Patterns).length,o=0,a=1/0,i=0;i<n;i++){e(i),r.applyMask(i,t);var u=r.getPenaltyN1(t)+r.getPenaltyN2(t)+r.getPenaltyN3(t)+r.getPenaltyN4(t);r.applyMask(i,t),u<a&&(a=u,o=i)}return o}}));E.Patterns,E.isValid,E.getPenaltyN1,E.getPenaltyN2,E.getPenaltyN3,E.getPenaltyN4,E.applyMask,E.getBestMask;var y=[1,1,1,1,1,1,1,1,1,1,2,2,1,2,2,4,1,2,4,4,2,4,4,4,2,4,6,5,2,4,6,6,2,5,8,8,4,5,8,8,4,5,8,11,4,8,10,11,4,9,12,16,4,9,16,16,6,10,12,18,6,10,17,16,6,11,16,19,6,13,18,21,7,14,21,25,8,16,20,25,8,17,23,25,9,17,23,34,9,18,25,30,10,20,27,32,12,21,29,35,12,23,34,37,12,25,34,40,13,26,35,42,14,28,38,45,15,29,40,48,16,31,43,51,17,33,45,54,18,35,48,57,19,37,51,60,19,38,53,63,20,40,56,66,21,43,59,70,22,45,62,74,24,47,65,77,25,49,68,81],A=[7,10,13,17,10,16,22,28,15,26,36,44,20,36,52,64,26,48,72,88,36,64,96,112,40,72,108,130,48,88,132,156,60,110,160,192,72,130,192,224,80,150,224,264,96,176,260,308,104,198,288,352,120,216,320,384,132,240,360,432,144,280,408,480,168,308,448,532,180,338,504,588,196,364,546,650,224,416,600,700,224,442,644,750,252,476,690,816,270,504,750,900,300,560,810,960,312,588,870,1050,336,644,952,1110,360,700,1020,1200,390,728,1050,1260,420,784,1140,1350,450,812,1200,1440,480,868,1290,1530,510,924,1350,1620,540,980,1440,1710,570,1036,1530,1800,570,1064,1590,1890,600,1120,1680,1980,630,1204,1770,2100,660,1260,1860,2220,720,1316,1950,2310,750,1372,2040,2430],I=function(t,r){switch(r){case c.L:return y[4*(t-1)+0];case c.M:return y[4*(t-1)+1];case c.Q:return y[4*(t-1)+2];case c.H:return y[4*(t-1)+3];default:return}},M=function(t,r){switch(r){case c.L:return A[4*(t-1)+0];case c.M:return A[4*(t-1)+1];case c.Q:return A[4*(t-1)+2];case c.H:return A[4*(t-1)+3];default:return}},N=new Uint8Array(512),B=new Uint8Array(256);!function(){for(var t=1,r=0;r<255;r++)N[r]=t,B[t]=r,256&(t<<=1)&&(t^=285);for(var e=255;e<512;e++)N[e]=N[e-255]}();var C=function(t){return N[t]},P=function(t,r){return 0===t||0===r?0:N[B[t]+B[r]]},R=h((function(t,r){r.mul=function(t,r){for(var e=new Uint8Array(t.length+r.length-1),n=0;n<t.length;n++)for(var o=0;o<r.length;o++)e[n+o]^=P(t[n],r[o]);return e},r.mod=function(t,r){for(var e=new Uint8Array(t);e.length-r.length>=0;){for(var n=e[0],o=0;o<r.length;o++)e[o]^=P(r[o],n);for(var a=0;a<e.length&&0===e[a];)a++;e=e.slice(a)}return e},r.generateECPolynomial=function(t){for(var e=new Uint8Array([1]),n=0;n<t;n++)e=r.mul(e,new Uint8Array([1,C(n)]));return e}}));function T(t){this.genPoly=void 0,this.degree=t,this.degree&&this.initialize(this.degree)}R.mul,R.mod,R.generateECPolynomial,T.prototype.initialize=function(t){this.degree=t,this.genPoly=R.generateECPolynomial(this.degree)},T.prototype.encode=function(t){if(!this.genPoly)throw new Error("Encoder not initialized");var r=new Uint8Array(t.length+this.degree);r.set(t);var e=R.mod(r,this.genPoly),n=this.degree-e.length;if(n>0){var o=new Uint8Array(this.degree);return o.set(e,n),o}return e};var L=T,b=function(t){return!isNaN(t)&&t>=1&&t<=40},U="(?:[u3000-u303F]|[u3040-u309F]|[u30A0-u30FF]|[uFF00-uFFEF]|[u4E00-u9FAF]|[u2605-u2606]|[u2190-u2195]|u203B|[u2010u2015u2018u2019u2025u2026u201Cu201Du2225u2260]|[u0391-u0451]|[u00A7u00A8u00B1u00B4u00D7u00F7])+",x="(?:(?![A-Z0-9 $%*+\\-./:]|"+(U=U.replace(/u/g,"\\u"))+")(?:.|[\r\n]))+",k=new RegExp(U,"g"),F=new RegExp("[^A-Z0-9 $%*+\\-./:]+","g"),S=new RegExp(x,"g"),D=new RegExp("[0-9]+","g"),Y=new RegExp("[A-Z $%*+\\-./:]+","g"),_=new RegExp("^"+U+"$"),z=new RegExp("^[0-9]+$"),H=new RegExp("^[A-Z0-9 $%*+\\-./:]+$"),J={KANJI:k,BYTE_KANJI:F,BYTE:S,NUMERIC:D,ALPHANUMERIC:Y,testKanji:function(t){return _.test(t)},testNumeric:function(t){return z.test(t)},testAlphanumeric:function(t){return H.test(t)}},K=h((function(t,r){r.NUMERIC={id:"Numeric",bit:1,ccBits:[10,12,14]},r.ALPHANUMERIC={id:"Alphanumeric",bit:2,ccBits:[9,11,13]},r.BYTE={id:"Byte",bit:4,ccBits:[8,16,16]},r.KANJI={id:"Kanji",bit:8,ccBits:[8,10,12]},r.MIXED={bit:-1},r.getCharCountIndicator=function(t,r){if(!t.ccBits)throw new Error("Invalid mode: "+t);if(!b(r))throw new Error("Invalid version: "+r);return r>=1&&r<10?t.ccBits[0]:r<27?t.ccBits[1]:t.ccBits[2]},r.getBestModeForData=function(t){return J.testNumeric(t)?r.NUMERIC:J.testAlphanumeric(t)?r.ALPHANUMERIC:J.testKanji(t)?r.KANJI:r.BYTE},r.toString=function(t){if(t&&t.id)return t.id;throw new Error("Invalid mode")},r.isValid=function(t){return t&&t.bit&&t.ccBits},r.from=function(t,e){if(r.isValid(t))return t;try{return function(t){if("string"!=typeof t)throw new Error("Param is not a string");switch(t.toLowerCase()){case"numeric":return r.NUMERIC;case"alphanumeric":return r.ALPHANUMERIC;case"kanji":return r.KANJI;case"byte":return r.BYTE;default:throw new Error("Unknown mode: "+t)}}(t)}catch(t){return e}}}));K.NUMERIC,K.ALPHANUMERIC,K.BYTE,K.KANJI,K.MIXED,K.getCharCountIndicator,K.getBestModeForData,K.isValid;var O=h((function(t,r){var e=i(7973);function n(t,r){return K.getCharCountIndicator(t,r)+4}function o(t,r){var e=0;return t.forEach((function(t){var o=n(t.mode,r);e+=o+t.getBitsLength()})),e}r.from=function(t,r){return b(t)?parseInt(t,10):r},r.getCapacity=function(t,r,e){if(!b(t))throw new Error("Invalid QR Code version");void 0===e&&(e=K.BYTE);var o=8*(a(t)-M(t,r));if(e===K.MIXED)return o;var i=o-n(e,t);switch(e){case K.NUMERIC:return Math.floor(i/10*3);case K.ALPHANUMERIC:return Math.floor(i/11*2);case K.KANJI:return Math.floor(i/13);case K.BYTE:default:return Math.floor(i/8)}},r.getBestVersionForData=function(t,e){var n,a=c.from(e,c.M);if(Array.isArray(t)){if(t.length>1)return function(t,e){for(var n=1;n<=40;n++){if(o(t,n)<=r.getCapacity(n,e,K.MIXED))return n}}(t,a);if(0===t.length)return 1;n=t[0]}else n=t;return function(t,e,n){for(var o=1;o<=40;o++)if(e<=r.getCapacity(o,n,t))return o}(n.mode,n.getLength(),a)},r.getEncodedBits=function(t){if(!b(t)||t<7)throw new Error("Invalid QR Code version");for(var r=t<<12;i(r)-e>=0;)r^=7973<<i(r)-e;return t<<12|r}}));O.getCapacity,O.getBestVersionForData,O.getEncodedBits;var Q=i(1335),V=function(t,r){for(var e=t.bit<<3|r,n=e<<10;i(n)-Q>=0;)n^=1335<<i(n)-Q;return 21522^(e<<10|n)};function q(t){this.mode=K.NUMERIC,this.data=t.toString()}q.getBitsLength=function(t){return 10*Math.floor(t/3)+(t%3?t%3*3+1:0)},q.prototype.getLength=function(){return this.data.length},q.prototype.getBitsLength=function(){return q.getBitsLength(this.data.length)},q.prototype.write=function(t){var r,e,n;for(r=0;r+3<=this.data.length;r+=3)e=this.data.substr(r,3),n=parseInt(e,10),t.put(n,10);var o=this.data.length-r;o>0&&(e=this.data.substr(r),n=parseInt(e,10),t.put(n,3*o+1))};var j=q,$=["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"," ","$","%","*","+","-",".","/",":"];function X(t){this.mode=K.ALPHANUMERIC,this.data=t}X.getBitsLength=function(t){return 11*Math.floor(t/2)+t%2*6},X.prototype.getLength=function(){return this.data.length},X.prototype.getBitsLength=function(){return X.getBitsLength(this.data.length)},X.prototype.write=function(t){var r;for(r=0;r+2<=this.data.length;r+=2){var e=45*$.indexOf(this.data[r]);e+=$.indexOf(this.data[r+1]),t.put(e,11)}this.data.length%2&&t.put($.indexOf(this.data[r]),6)};var Z=X;function W(t){this.mode=K.BYTE,"string"==typeof t&&(t=function(t){for(var r=[],e=t.length,n=0;n<e;n++){var o=t.charCodeAt(n);if(o>=55296&&o<=56319&&e>n+1){var a=t.charCodeAt(n+1);a>=56320&&a<=57343&&(o=1024*(o-55296)+a-56320+65536,n+=1)}o<128?r.push(o):o<2048?(r.push(o>>6|192),r.push(63&o|128)):o<55296||o>=57344&&o<65536?(r.push(o>>12|224),r.push(o>>6&63|128),r.push(63&o|128)):o>=65536&&o<=1114111?(r.push(o>>18|240),r.push(o>>12&63|128),r.push(o>>6&63|128),r.push(63&o|128)):r.push(239,191,189)}return new Uint8Array(r).buffer}(t)),this.data=new Uint8Array(t)}W.getBitsLength=function(t){return 8*t},W.prototype.getLength=function(){return this.data.length},W.prototype.getBitsLength=function(){return W.getBitsLength(this.data.length)},W.prototype.write=function(t){for(var r=0,e=this.data.length;r<e;r++)t.put(this.data[r],8)};var G=W;function tt(t){this.mode=K.KANJI,this.data=t}tt.getBitsLength=function(t){return 13*t},tt.prototype.getLength=function(){return this.data.length},tt.prototype.getBitsLength=function(){return tt.getBitsLength(this.data.length)},tt.prototype.write=function(t){var r;for(r=0;r<this.data.length;r++){var e=f(this.data[r]);if(e>=33088&&e<=40956)e-=33088;else{if(!(e>=57408&&e<=60351))throw new Error("Invalid SJIS character: "+this.data[r]+"\nMake sure your charset is UTF-8");e-=49472}e=192*(e>>>8&255)+(255&e),t.put(e,13)}};var rt=tt,et=h((function(t){var r={single_source_shortest_paths:function(t,e,n){var o={},a={};a[e]=0;var i,u,s,f,h,c,g,d=r.PriorityQueue.make();for(d.push(e,0);!d.empty();)for(s in u=(i=d.pop()).value,f=i.cost,h=t[u]||{})h.hasOwnProperty(s)&&(c=f+h[s],g=a[s],(void 0===a[s]||g>c)&&(a[s]=c,d.push(s,c),o[s]=u));if(void 0!==n&&void 0===a[n]){var l=["Could not find a path from ",e," to ",n,"."].join("");throw new Error(l)}return o},extract_shortest_path_from_predecessor_list:function(t,r){for(var e=[],n=r;n;)e.push(n),n=t[n];return e.reverse(),e},find_path:function(t,e,n){var o=r.single_source_shortest_paths(t,e,n);return r.extract_shortest_path_from_predecessor_list(o,n)},PriorityQueue:{make:function(t){var e,n=r.PriorityQueue,o={};for(e in t=t||{},n)n.hasOwnProperty(e)&&(o[e]=n[e]);return o.queue=[],o.sorter=t.sorter||n.default_sorter,o},default_sorter:function(t,r){return t.cost-r.cost},push:function(t,r){var e={value:t,cost:r};this.queue.push(e),this.queue.sort(this.sorter)},pop:function(){return this.queue.shift()},empty:function(){return 0===this.queue.length}}};t.exports=r})),nt=h((function(t,r){function e(t){return unescape(encodeURIComponent(t)).length}function n(t,r,e){for(var n,o=[];null!==(n=t.exec(e));)o.push({data:n[0],index:n.index,mode:r,length:n[0].length});return o}function o(t){var r,e,o=n(J.NUMERIC,K.NUMERIC,t),a=n(J.ALPHANUMERIC,K.ALPHANUMERIC,t);return s()?(r=n(J.BYTE,K.BYTE,t),e=n(J.KANJI,K.KANJI,t)):(r=n(J.BYTE_KANJI,K.BYTE,t),e=[]),o.concat(a,r,e).sort((function(t,r){return t.index-r.index})).map((function(t){return{data:t.data,mode:t.mode,length:t.length}}))}function a(t,r){switch(r){case K.NUMERIC:return j.getBitsLength(t);case K.ALPHANUMERIC:return Z.getBitsLength(t);case K.KANJI:return rt.getBitsLength(t);case K.BYTE:return G.getBitsLength(t)}}function i(t,r){var e,n=K.getBestModeForData(t);if((e=K.from(r,n))!==K.BYTE&&e.bit<n.bit)throw new Error('"'+t+'" cannot be encoded with mode '+K.toString(e)+".\n Suggested mode is: "+K.toString(n));switch(e!==K.KANJI||s()||(e=K.BYTE),e){case K.NUMERIC:return new j(t);case K.ALPHANUMERIC:return new Z(t);case K.KANJI:return new rt(t);case K.BYTE:return new G(t)}}r.fromArray=function(t){return t.reduce((function(t,r){return"string"==typeof r?t.push(i(r,null)):r.data&&t.push(i(r.data,r.mode)),t}),[])},r.fromString=function(t,n){for(var i=function(t,r){for(var e={},n={start:{}},o=["start"],i=0;i<t.length;i++){for(var u=t[i],s=[],f=0;f<u.length;f++){var h=u[f],c=""+i+f;s.push(c),e[c]={node:h,lastCount:0},n[c]={};for(var g=0;g<o.length;g++){var d=o[g];e[d]&&e[d].node.mode===h.mode?(n[d][c]=a(e[d].lastCount+h.length,h.mode)-a(e[d].lastCount,h.mode),e[d].lastCount+=h.length):(e[d]&&(e[d].lastCount=h.length),n[d][c]=a(h.length,h.mode)+4+K.getCharCountIndicator(h.mode,r))}}o=s}for(var l=0;l<o.length;l++)n[o[l]].end=0;return{map:n,table:e}}(function(t){for(var r=[],n=0;n<t.length;n++){var o=t[n];switch(o.mode){case K.NUMERIC:r.push([o,{data:o.data,mode:K.ALPHANUMERIC,length:o.length},{data:o.data,mode:K.BYTE,length:o.length}]);break;case K.ALPHANUMERIC:r.push([o,{data:o.data,mode:K.BYTE,length:o.length}]);break;case K.KANJI:r.push([o,{data:o.data,mode:K.BYTE,length:e(o.data)}]);break;case K.BYTE:r.push([{data:o.data,mode:K.BYTE,length:e(o.data)}])}}return r}(o(t)),n),u=et.find_path(i.map,"start","end"),s=[],f=1;f<u.length-1;f++)s.push(i.table[u[f]].node);return r.fromArray(function(t){return t.reduce((function(t,r){var e=t.length-1>=0?t[t.length-1]:null;return e&&e.mode===r.mode?(t[t.length-1].data+=r.data,t):(t.push(r),t)}),[])}(s))},r.rawSplit=function(t){return r.fromArray(o(t))}}));function ot(t,r,e){var n,o,a=t.size,i=V(r,e);for(n=0;n<15;n++)o=1==(i>>n&1),n<6?t.set(n,8,o,!0):n<8?t.set(n+1,8,o,!0):t.set(a-15+n,8,o,!0),n<8?t.set(8,a-n-1,o,!0):n<9?t.set(8,15-n-1+1,o,!0):t.set(8,15-n-1,o,!0);t.set(a-8,8,1,!0)}function at(t,r,e){var n=new d;e.forEach((function(r){n.put(r.mode.bit,4),n.put(r.getLength(),K.getCharCountIndicator(r.mode,t)),r.write(n)}));var o=8*(a(t)-M(t,r));for(n.getLengthInBits()+4<=o&&n.put(0,4);n.getLengthInBits()%8!=0;)n.putBit(0);for(var i=(o-n.getLengthInBits())/8,u=0;u<i;u++)n.put(u%2?17:236,8);return function(t,r,e){for(var n=a(r),o=M(r,e),i=n-o,u=I(r,e),s=u-n%u,f=Math.floor(n/u),h=Math.floor(i/u),c=h+1,g=f-h,d=new L(g),l=0,v=new Array(u),p=new Array(u),w=0,m=new Uint8Array(t.buffer),E=0;E<u;E++){var y=E<s?h:c;v[E]=m.slice(l,l+y),p[E]=d.encode(v[E]),l+=y,w=Math.max(w,y)}var A,N,B=new Uint8Array(n),C=0;for(A=0;A<w;A++)for(N=0;N<u;N++)A<v[N].length&&(B[C++]=v[N][A]);for(A=0;A<g;A++)for(N=0;N<u;N++)B[C++]=p[N][A];return B}(n,t,r)}function it(t,r,e,n){var a;if(Array.isArray(t))a=nt.fromArray(t);else{if("string"!=typeof t)throw new Error("Invalid data");var i=r;if(!i){var u=nt.rawSplit(t);i=O.getBestVersionForData(u,e)}a=nt.fromString(t,i||40)}var s=O.getBestVersionForData(a,e);if(!s)throw new Error("The amount of data is too big to be stored in a QR Code");if(r){if(r<s)throw new Error("\nThe chosen QR Code version cannot contain this amount of data.\nMinimum version required to store current data is: "+s+".\n")}else r=s;var f=at(r,e,a),h=o(r),c=new v(h);return function(t,r){for(var e=t.size,n=m(r),o=0;o<n.length;o++)for(var a=n[o][0],i=n[o][1],u=-1;u<=7;u++)if(!(a+u<=-1||e<=a+u))for(var s=-1;s<=7;s++)i+s<=-1||e<=i+s||(u>=0&&u<=6&&(0===s||6===s)||s>=0&&s<=6&&(0===u||6===u)||u>=2&&u<=4&&s>=2&&s<=4?t.set(a+u,i+s,!0,!0):t.set(a+u,i+s,!1,!0))}(c,r),function(t){for(var r=t.size,e=8;e<r-8;e++){var n=e%2==0;t.set(e,6,n,!0),t.set(6,e,n,!0)}}(c),function(t,r){for(var e=p.getPositions(r),n=0;n<e.length;n++)for(var o=e[n][0],a=e[n][1],i=-2;i<=2;i++)for(var u=-2;u<=2;u++)-2===i||2===i||-2===u||2===u||0===i&&0===u?t.set(o+i,a+u,!0,!0):t.set(o+i,a+u,!1,!0)}(c,r),ot(c,e,0),r>=7&&function(t,r){for(var e,n,o,a=t.size,i=O.getEncodedBits(r),u=0;u<18;u++)e=Math.floor(u/3),n=u%3+a-8-3,o=1==(i>>u&1),t.set(e,n,o,!0),t.set(n,e,o,!0)}(c,r),function(t,r){for(var e=t.size,n=-1,o=e-1,a=7,i=0,u=e-1;u>0;u-=2)for(6===u&&u--;;){for(var s=0;s<2;s++)if(!t.isReserved(o,u-s)){var f=!1;i<r.length&&(f=1==(r[i]>>>a&1)),t.set(o,u-s,f),-1===--a&&(i++,a=7)}if((o+=n)<0||e<=o){o-=n,n=-n;break}}}(c,f),isNaN(n)&&(n=E.getBestMask(c,ot.bind(null,c,e))),E.applyMask(n,c),ot(c,e,n),{modules:c,version:r,errorCorrectionLevel:e,maskPattern:n,segments:a}}nt.fromArray,nt.fromString,nt.rawSplit;var ut=function(t,r){if(void 0===t||""===t)throw new Error("No input text");var e,n,o=c.M;return void 0!==r&&(o=c.from(r.errorCorrectionLevel,c.M),e=O.from(r.version),n=E.from(r.maskPattern),r.toSJISFunc&&u(r.toSJISFunc)),it(t,e,o,n)},st=h((function(t,r){function e(t){if("number"==typeof t&&(t=t.toString()),"string"!=typeof t)throw new Error("Color should be defined as hex string");var r=t.slice().replace("#","").split("");if(r.length<3||5===r.length||r.length>8)throw new Error("Invalid hex color: "+t);3!==r.length&&4!==r.length||(r=Array.prototype.concat.apply([],r.map((function(t){return[t,t]})))),6===r.length&&r.push("F","F");var e=parseInt(r.join(""),16);return{r:e>>24&255,g:e>>16&255,b:e>>8&255,a:255&e,hex:"#"+r.slice(0,6).join("")}}r.getOptions=function(t){t||(t={}),t.color||(t.color={});var r=void 0===t.margin||null===t.margin||t.margin<0?4:t.margin,n=t.width&&t.width>=21?t.width:void 0,o=t.scale||4;return{width:n,scale:n?4:o,margin:r,color:{dark:e(t.color.dark||"#000000ff"),light:e(t.color.light||"#ffffffff")},type:t.type,rendererOpts:t.rendererOpts||{}}},r.getScale=function(t,r){return r.width&&r.width>=t+2*r.margin?r.width/(t+2*r.margin):r.scale},r.getImageWidth=function(t,e){var n=r.getScale(t,e);return Math.floor((t+2*e.margin)*n)},r.qrToImageData=function(t,e,n){for(var o=e.modules.size,a=e.modules.data,i=r.getScale(o,n),u=Math.floor((o+2*n.margin)*i),s=n.margin*i,f=[n.color.light,n.color.dark],h=0;h<u;h++)for(var c=0;c<u;c++){var g=4*(h*u+c),d=n.color.light;if(h>=s&&c>=s&&h<u-s&&c<u-s)d=f[a[Math.floor((h-s)/i)*o+Math.floor((c-s)/i)]?1:0];t[g++]=d.r,t[g++]=d.g,t[g++]=d.b,t[g]=d.a}}}));st.getOptions,st.getScale,st.getImageWidth,st.qrToImageData;var ft=h((function(t,r){r.render=function(t,r,e){var n=e,o=r;void 0!==n||r&&r.getContext||(n=r,r=void 0),r||(o=function(){try{return document.createElement("canvas")}catch(t){throw new Error("You need to specify a canvas element")}}()),n=st.getOptions(n);var a=st.getImageWidth(t.modules.size,n),i=o.getContext("2d"),u=i.createImageData(a,a);return st.qrToImageData(u.data,t,n),function(t,r,e){t.clearRect(0,0,r.width,r.height),r.style||(r.style={}),r.height=e,r.width=e,r.style.height=e+"px",r.style.width=e+"px"}(i,o,a),i.putImageData(u,0,0),o},r.renderToDataURL=function(t,e,n){var o=n;void 0!==o||e&&e.getContext||(o=e,e=void 0),o||(o={});var a=r.render(t,e,o),i=o.type||"image/png",u=o.rendererOpts||{};return a.toDataURL(i,u.quality)}}));function ht(t,r){var e=t.a/255,n=r+'="'+t.hex+'"';return e<1?n+" "+r+'-opacity="'+e.toFixed(2).slice(1)+'"':n}function ct(t,r,e){var n=t+r;return void 0!==e&&(n+=" "+e),n}ft.render,ft.renderToDataURL;var gt=function(t,r,e){var n=st.getOptions(r),o=t.modules.size,a=t.modules.data,i=o+2*n.margin,u=n.color.light.a?"<path "+ht(n.color.light,"fill")+' d="M0 0h'+i+"v"+i+'H0z"/>':"",s="<path "+ht(n.color.dark,"stroke")+' d="'+function(t,r,e){for(var n="",o=0,a=!1,i=0,u=0;u<t.length;u++){var s=Math.floor(u%r),f=Math.floor(u/r);s||a||(a=!0),t[u]?(i++,u>0&&s>0&&t[u-1]||(n+=a?ct("M",s+e,.5+f+e):ct("m",o,0),o=0,a=!1),s+1<r&&t[u+1]||(n+=ct("h",i),i=0)):o++}return n}(a,o,n.margin)+'"/>',f='viewBox="0 0 '+i+" "+i+'"',h='<svg xmlns="http://www.w3.org/2000/svg" '+(n.width?'width="'+n.width+'" height="'+n.width+'" ':"")+f+' shape-rendering="crispEdges">'+u+s+"</svg>\n";return"function"==typeof e&&e(null,h),h};function dt(t,r,n,o,a){var i=[].slice.call(arguments,1),u=i.length,s="function"==typeof i[u-1];if(!s&&!e())throw new Error("Callback required as last argument");if(!s){if(u<1)throw new Error("Too few arguments provided");return 1===u?(n=r,r=o=void 0):2!==u||r.getContext||(o=n,n=r,r=void 0),new Promise((function(e,a){try{var i=ut(n,o);e(t(i,r,o))}catch(t){a(t)}}))}if(u<2)throw new Error("Too few arguments provided");2===u?(a=n,n=r,r=o=void 0):3===u&&(r.getContext&&void 0===a?(a=o,o=void 0):(a=o,o=n,n=r,r=void 0));try{var f=ut(n,o);a(null,t(f,r,o))}catch(t){a(t)}}var lt=ut,vt=dt.bind(null,ft.render),pt=dt.bind(null,ft.renderToDataURL),wt=dt.bind(null,(function(t,r,e){return gt(t,e)})),mt={create:lt,toCanvas:vt,toDataURL:pt,toString:wt};return t.create=lt,t.default=mt,t.toCanvas=vt,t.toDataURL=pt,t.toString=wt,Object.defineProperty(t,"__esModule",{value:!0}),t}({});
+
+</script>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-head">
+        <div class="eyebrow" data-i18n="badge">Single File HTML · v101</div>
+        <div class="choice-group">
+          <div class="lang-note" data-i18n="languageLabel">語言</div>
+          <div class="choice-row" id="language-switcher">
+            <button class="choice-button is-active" type="button" data-lang="zh-TW">繁</button>
+            <button class="choice-button" type="button" data-lang="zh-CN">简</button>
+            <button class="choice-button" type="button" data-lang="en">EN</button>
+            <button class="choice-button" type="button" data-lang="ja">日本語</button>
+          </div>
+        </div>
+      </div>
+      <h1 data-i18n="heroTitle">QRCode 產生器</h1>
+      <div class="lead" data-i18n="heroSubtitle">FALO 模型菜｜單一 HTML，可本地執行，也可直接部署</div>
+      <div class="chips">
+        <span class="chip" data-i18n="chipOne">單一 HTML</span>
+        <span class="chip" data-i18n="chipTwo">本地可用</span>
+        <span class="chip" data-i18n="chipThree">GitHub / Google 可部署</span>
+      </div>
+    </section>
+
+    <section class="layout">
+      <section class="panel">
+        <h2 data-i18n="controlsTitle">控制面板</h2>
+        <div class="controls">
+          <div class="field-group">
+            <label for="qr-text" data-i18n="contentLabel">內容</label>
+            <textarea id="qr-text" data-i18n-placeholder="contentPlaceholder">https://force.formosa-ai.com</textarea>
+            <div class="field-note" data-i18n="contentNote">最常見用途就是網址。先做這個，就已經能拿去展示與分享。</div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-grid">
+              <div>
+                <label for="foreground" data-i18n="foregroundLabel">前景色</label>
+                <input id="foreground" type="color" value="#6c59b2">
+              </div>
+              <div>
+                <label for="background" data-i18n="backgroundLabel">背景色</label>
+                <input id="background" type="color" value="#fffdf6">
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="inline-meta">
+              <label for="size" data-i18n="sizeLabel">尺寸</label>
+              <span id="size-value">400 px</span>
+            </div>
+            <input id="size" type="range" min="180" max="720" step="20" value="400">
+          </div>
+
+          <div class="field-group">
+            <label for="filename" data-i18n="filenameLabel">輸出檔名</label>
+            <input id="filename" type="text" data-i18n-placeholder="filenamePlaceholder">
+            <div class="field-note" data-i18n="filenameNote">預設會帶入版本與時間，你也可以自行改名。</div>
+          </div>
+
+          <div class="field-group">
+            <label for="logo-file" data-i18n="logoLabel">Logo</label>
+            <input id="logo-file" type="file" accept="image/png,image/jpeg,image/jpg,image/webp,image/svg+xml">
+            <div class="field-grid">
+              <div>
+                <label data-i18n="logoModeLabel">Logo 模式</label>
+                <input id="logo-mode" type="hidden" value="image">
+                <div class="choice-group">
+                  <div class="choice-row" data-choice-group="logo-mode">
+                    <button class="choice-button is-active" type="button" data-choice-value="image" data-i18n="logoModeImage">圖片 Logo</button>
+                    <button class="choice-button" type="button" data-choice-value="text" data-i18n="logoModeText">文字 Logo</button>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label data-i18n="logoShapeLabel">外框形狀</label>
+                <input id="logo-shape" type="hidden" value="rect">
+                <div class="choice-group">
+                  <div class="choice-row" data-choice-group="logo-shape">
+                    <button class="choice-button is-active" type="button" data-choice-value="rect" data-i18n="logoShapeRect">矩形</button>
+                    <button class="choice-button" type="button" data-choice-value="circle" data-i18n="logoShapeCircle">圓形</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field-grid">
+              <div>
+                <label for="logo-line-1" data-i18n="logoLine1Label">文字 Logo 第一行</label>
+                <input id="logo-line-1" type="text" data-i18n-placeholder="logoLine1Placeholder">
+              </div>
+              <div>
+                <label data-i18n="logoLayoutLabel">文字版型</label>
+                <input id="logo-layout" type="hidden" value="single">
+                <div class="choice-group">
+                  <div class="choice-row" data-choice-group="logo-layout">
+                    <button class="choice-button is-active" type="button" data-choice-value="single" data-i18n="logoLayoutSingle">單行</button>
+                    <button class="choice-button" type="button" data-choice-value="double" data-i18n="logoLayoutDouble">雙行</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label for="logo-line-2" data-i18n="logoLine2Label">文字 Logo 第二行</label>
+              <input id="logo-line-2" type="text" data-i18n-placeholder="logoLine2Placeholder">
+            </div>
+            <div class="field-grid">
+              <div>
+                <div class="inline-meta">
+                  <label for="logo-text-size" data-i18n="logoTextSizeLabel">文字大小</label>
+                  <span id="logo-text-size-value">100%</span>
+                </div>
+                <input id="logo-text-size" type="range" min="60" max="180" step="5" value="100">
+              </div>
+              <div>
+                <label for="logo-text-color" data-i18n="logoTextColorLabel">文字顏色</label>
+                <input id="logo-text-color" type="color" value="#6c59b2">
+              </div>
+            </div>
+            <div class="inline-meta">
+              <label for="logo-scale" data-i18n="logoScaleLabel">Logo 比例</label>
+              <span id="logo-scale-value">20%</span>
+            </div>
+            <input id="logo-scale" type="range" min="12" max="30" step="1" value="20">
+            <div class="field-note" id="logo-name">尚未加入 Logo</div>
+          </div>
+
+          <div class="button-row">
+            <button class="button" id="download-png-btn" type="button" data-i18n="downloadPng">下載 PNG</button>
+            <button class="button-secondary" id="download-jpg-btn" type="button" data-i18n="downloadJpg">下載 JPG</button>
+            <button class="button-secondary" id="download-svg-btn" type="button" data-i18n="downloadSvg">下載 SVG</button>
+            <button class="button-secondary" id="download-pdf-btn" type="button" data-i18n="downloadPdf">下載 PDF</button>
+            <button class="button-secondary" id="clear-logo-btn" type="button" data-i18n="clearLogo">移除 Logo</button>
+            <button class="button-ghost" id="reset-btn" type="button" data-i18n="resetButton">重設預設值</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel preview-shell">
+        <div>
+          <h2 data-i18n="previewTitle">即時預覽</h2>
+          <p class="helper" data-i18n="previewHelper">你調整文字、顏色、尺寸或 Logo 時，右邊會同步更新。</p>
+        </div>
+        <div class="preview-card">
+          <canvas id="qr-canvas" width="400" height="400" aria-label="QR Code 預覽"></canvas>
+        </div>
+        <div class="preview-meta">
+          <div class="preview-label" data-i18n="previewTextLabel">QRCode 文字</div>
+          <div class="preview-text" id="preview-text">https://force.formosa-ai.com</div>
+          <button class="inline-action" id="refresh-btn" type="button" data-i18n="refreshButton">點我手動刷新</button>
+        </div>
+        <div class="status" id="status">已就緒。</div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <span data-i18n="footerCopyright">© 2026 Force Cheng × FALO. All rights reserved.</span><br>
+    <span data-i18n="footerWebsiteLabel">Force Cheng Web :</span>
+    <a class="footer-link" href="https://force.formosa-ai.com">https://force.formosa-ai.com</a><br>
+    <span data-i18n="footerVersion">Version: v101</span>
+  </footer>
+
+  <script>
+    const textInput = document.getElementById("qr-text");
+    const foregroundInput = document.getElementById("foreground");
+    const backgroundInput = document.getElementById("background");
+    const sizeInput = document.getElementById("size");
+    const sizeValue = document.getElementById("size-value");
+    const filenameInput = document.getElementById("filename");
+    const logoFileInput = document.getElementById("logo-file");
+    const logoModeInput = document.getElementById("logo-mode");
+    const logoShapeInput = document.getElementById("logo-shape");
+    const logoLine1Input = document.getElementById("logo-line-1");
+    const logoLine2Input = document.getElementById("logo-line-2");
+    const logoLayoutInput = document.getElementById("logo-layout");
+    const logoScaleInput = document.getElementById("logo-scale");
+    const logoScaleValue = document.getElementById("logo-scale-value");
+    const logoTextSizeInput = document.getElementById("logo-text-size");
+    const logoTextSizeValue = document.getElementById("logo-text-size-value");
+    const logoTextColorInput = document.getElementById("logo-text-color");
+    const logoName = document.getElementById("logo-name");
+    const choiceRows = document.querySelectorAll("[data-choice-group]");
+    const downloadPngButton = document.getElementById("download-png-btn");
+    const downloadJpgButton = document.getElementById("download-jpg-btn");
+    const downloadSvgButton = document.getElementById("download-svg-btn");
+    const downloadPdfButton = document.getElementById("download-pdf-btn");
+    const clearLogoButton = document.getElementById("clear-logo-btn");
+    const resetButton = document.getElementById("reset-btn");
+    const refreshButton = document.getElementById("refresh-btn");
+    const previewText = document.getElementById("preview-text");
+    const canvas = document.getElementById("qr-canvas");
+    const statusText = document.getElementById("status");
+    const languageButtons = Array.from(document.querySelectorAll("[data-lang]"));
+    const structuredData = document.getElementById("structured-data");
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    const metaAuthor = document.querySelector('meta[name="author"]');
+    const metaRobots = document.querySelector('meta[name="robots"]');
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    const ogSiteName = document.querySelector('meta[property="og:site_name"]');
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+
+    const defaults = {
+      text: "https://force.formosa-ai.com",
+      foreground: "#6c59b2",
+      background: "#fffdf6",
+      size: 400,
+      filename: "",
+      logoScale: 20,
+      logoTextSize: 100,
+      logoTextColor: "#6c59b2",
+      logoMode: "image",
+      logoShape: "rect",
+      logoLine1: "",
+      logoLine2: "",
+      logoLayout: "single"
+    };
+
+    const state = {
+      currentLanguage: "zh-TW",
+      logoImage: null,
+      logoFilename: "",
+      logoDataUrl: "",
+      renderVersion: 0,
+      renderTimer: null,
+      lastStatusKey: "statusReady"
+    };
+
+    const i18n = {
+      "zh-TW": {
+        htmlLang: "zh-Hant",
+        ogLocale: "zh_TW",
+        title: "FALO QRCode 產生器 v101 | 完整功能單檔工具 | Force Cheng × FALO",
+        description: "FALO QRCode 產生器 v101 是可本機直接開啟的單檔 HTML 工具，支援繁中、簡中、英文、日文切換，提供 Logo、色彩、尺寸與 PNG、JPG、SVG、PDF 匯出。",
+        keywords: "QRCode, QRCode 產生器, 單檔 HTML, Logo QRCode, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
+        author: "Force Cheng × FALO",
+        robots: "index, follow, max-image-preview:large",
+        ogTitle: "FALO QRCode 產生器 v101 | 完整功能單檔工具",
+        ogDescription: "可本機直接打開、可部署 GitHub Pages 的單檔 QRCode 工具，支援多語系、Logo、色彩、尺寸與 PNG / JPG / SVG / PDF 下載。",
+        twitterTitle: "FALO QRCode 產生器 v101 | 完整功能單檔工具",
+        twitterDescription: "極簡入口、完整功能的單檔 QRCode 工具，支援多語系、本機開啟、Logo 與多格式下載。",
+        badge: "Single File HTML · v101",
+        languageLabel: "語言",
+        heroTitle: "QRCode 產生器",
+        heroSubtitle: "FALO 模型菜｜單一 HTML，可本地執行，也可直接部署",
+        chipOne: "單一 HTML",
+        chipTwo: "本地可用",
+        chipThree: "GitHub / Google 可部署",
+        controlsTitle: "控制面板",
+        contentLabel: "內容",
+        contentPlaceholder: "輸入網址、文字或任何要轉成 QRCode 的內容",
+        contentNote: "最常見用途就是網址。先做這個，就已經能拿去展示與分享。",
+        foregroundLabel: "前景色",
+        backgroundLabel: "背景色",
+        sizeLabel: "尺寸",
+        sizeUnit: "px",
+        filenameLabel: "輸出檔名",
+        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenameNote: "預設會帶入版本與時間，你也可以自行改名。",
+        logoLabel: "Logo",
+        logoModeLabel: "Logo 模式",
+        logoModeImage: "圖片 Logo",
+        logoModeText: "文字 Logo",
+        logoShapeLabel: "外框形狀",
+        logoShapeRect: "矩形",
+        logoShapeCircle: "圓形",
+        logoLine1Label: "文字 Logo 第一行",
+        logoLine1Placeholder: "例如：FALO",
+        logoLine2Label: "文字 Logo 第二行",
+        logoLine2Placeholder: "例如：AI",
+        logoLayoutLabel: "文字版型",
+        logoLayoutSingle: "單行",
+        logoLayoutDouble: "雙行",
+        logoTextSizeLabel: "文字大小",
+        logoTextColorLabel: "文字顏色",
+        logoScaleLabel: "Logo 比例",
+        logoNone: "尚未加入 Logo",
+        logoImageCurrent: "目前圖片 Logo：",
+        logoTextCurrent: "目前使用文字 Logo",
+        downloadPng: "下載 PNG",
+        downloadJpg: "下載 JPG",
+        downloadSvg: "下載 SVG",
+        downloadPdf: "下載 PDF",
+        clearLogo: "移除 Logo",
+        resetButton: "重設預設值",
+        previewTitle: "即時預覽",
+        previewHelper: "你調整文字、顏色、尺寸或 Logo 時，右邊會同步更新。",
+        previewTextLabel: "QRCode 文字",
+        previewEmpty: "尚未輸入內容",
+        previewCanvasAria: "QR Code 預覽",
+        refreshButton: "點我手動刷新",
+        footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
+        footerWebsiteLabel: "Force Cheng Web :",
+        footerVersion: "Version: v101",
+        statusReady: "已就緒。",
+        statusRendering: "正在更新預覽…",
+        statusUpdated: "已更新。",
+        statusPngReady: "PNG 已準備完成。",
+        statusJpgReady: "JPG 已準備完成。",
+        statusSvgReady: "SVG 已準備完成。",
+        statusPdfReady: "已開啟 PDF 列印視窗，請在系統列印面板中選擇另存為 PDF。",
+        statusPdfBlocked: "無法開啟 PDF 視窗，請確認瀏覽器沒有擋住彈出視窗。",
+        statusError: "產生失敗，請檢查輸入內容。",
+        statusLibMissing: "QR 函式庫尚未載入完成，請稍候。"
+      },
+      "zh-CN": {
+        htmlLang: "zh-Hans",
+        ogLocale: "zh_CN",
+        title: "FALO QRCode 生成器 v101 | 完整功能单文件工具 | Force Cheng × FALO",
+        description: "FALO QRCode 生成器 v101 是可本地直接打开的单文件 HTML 工具，支持繁中、简中、英文、日文切换，并提供 Logo、颜色、尺寸与 PNG、JPG、SVG、PDF 导出。",
+        keywords: "QRCode, 二维码生成器, 单文件 HTML, Logo QRCode, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
+        author: "Force Cheng × FALO",
+        robots: "index, follow, max-image-preview:large",
+        ogTitle: "FALO QRCode 生成器 v101 | 完整功能单文件工具",
+        ogDescription: "可本地直接打开、可部署 GitHub Pages 的单文件 QRCode 工具，支持多语言、Logo、颜色、尺寸与 PNG / JPG / SVG / PDF 下载。",
+        twitterTitle: "FALO QRCode 生成器 v101 | 完整功能单文件工具",
+        twitterDescription: "极简入口、完整功能的单文件 QRCode 工具，支持多语言、本地打开、Logo 与多格式下载。",
+        badge: "Single File HTML · v101",
+        languageLabel: "语言",
+        heroTitle: "QRCode 生成器",
+        heroSubtitle: "FALO 模型菜｜单一 HTML，可本地运行，也可直接部署",
+        chipOne: "单一 HTML",
+        chipTwo: "本地可用",
+        chipThree: "GitHub / Google 可部署",
+        controlsTitle: "控制面板",
+        contentLabel: "内容",
+        contentPlaceholder: "输入网址、文字或任何要转成 QRCode 的内容",
+        contentNote: "最常见用途就是网址。先做这个，就已经能拿去展示与分享。",
+        foregroundLabel: "前景色",
+        backgroundLabel: "背景色",
+        sizeLabel: "尺寸",
+        sizeUnit: "px",
+        filenameLabel: "输出文件名",
+        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenameNote: "默认会带入版本与时间，你也可以自行改名。",
+        logoLabel: "Logo",
+        logoModeLabel: "Logo 模式",
+        logoModeImage: "图片 Logo",
+        logoModeText: "文字 Logo",
+        logoShapeLabel: "外框形状",
+        logoShapeRect: "矩形",
+        logoShapeCircle: "圆形",
+        logoLine1Label: "文字 Logo 第一行",
+        logoLine1Placeholder: "例如：FALO",
+        logoLine2Label: "文字 Logo 第二行",
+        logoLine2Placeholder: "例如：AI",
+        logoLayoutLabel: "文字版型",
+        logoLayoutSingle: "单行",
+        logoLayoutDouble: "双行",
+        logoTextSizeLabel: "文字大小",
+        logoTextColorLabel: "文字颜色",
+        logoScaleLabel: "Logo 比例",
+        logoNone: "尚未加入 Logo",
+        logoImageCurrent: "当前图片 Logo：",
+        logoTextCurrent: "当前使用文字 Logo",
+        downloadPng: "下载 PNG",
+        downloadJpg: "下载 JPG",
+        downloadSvg: "下载 SVG",
+        downloadPdf: "下载 PDF",
+        clearLogo: "移除 Logo",
+        resetButton: "恢复默认值",
+        previewTitle: "即时预览",
+        previewHelper: "你调整文字、颜色、尺寸或 Logo 时，右侧会同步更新。",
+        previewTextLabel: "QRCode 文字",
+        previewEmpty: "尚未输入内容",
+        previewCanvasAria: "QR Code 预览",
+        refreshButton: "手动刷新",
+        footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
+        footerWebsiteLabel: "Force Cheng Web :",
+        footerVersion: "Version: v101",
+        statusReady: "已就绪。",
+        statusRendering: "正在更新预览…",
+        statusUpdated: "已更新。",
+        statusPngReady: "PNG 已准备完成。",
+        statusJpgReady: "JPG 已准备完成。",
+        statusSvgReady: "SVG 已准备完成。",
+        statusPdfReady: "已打开 PDF 打印窗口，请在系统打印面板中选择另存为 PDF。",
+        statusPdfBlocked: "无法打开 PDF 窗口，请确认浏览器没有拦截弹出窗口。",
+        statusError: "生成失败，请检查输入内容。",
+        statusLibMissing: "QR 函式库尚未加载完成，请稍候。"
+      },
+      "en": {
+        htmlLang: "en",
+        ogLocale: "en_US",
+        title: "FALO QR Code Generator v101 | Full-Featured Single-File Tool | Force Cheng × FALO",
+        description: "FALO QR Code Generator v101 is a local-first single-file HTML tool with Traditional Chinese, Simplified Chinese, English, and Japanese support. It includes logo, colors, size controls, and PNG, JPG, SVG, PDF export.",
+        keywords: "QR Code, QR Code Generator, single-file HTML, Logo QR Code, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
+        author: "Force Cheng × FALO",
+        robots: "index, follow, max-image-preview:large",
+        ogTitle: "FALO QR Code Generator v101 | Full-Featured Single-File Tool",
+        ogDescription: "A local-first QR Code tool you can open directly or deploy to GitHub Pages, with multilingual UI, logo support, color controls, size controls, and PNG / JPG / SVG / PDF export.",
+        twitterTitle: "FALO QR Code Generator v101 | Full-Featured Single-File Tool",
+        twitterDescription: "A minimal entry with full QR capabilities: multilingual UI, logos, and multi-format downloads in one single-file tool.",
+        badge: "Single File HTML · v101",
+        languageLabel: "Language",
+        heroTitle: "QR Code Generator",
+        heroSubtitle: "FALO Model Basics | Single HTML, runnable locally, deployable directly",
+        chipOne: "Single HTML",
+        chipTwo: "Local Ready",
+        chipThree: "GitHub / Google Deployable",
+        controlsTitle: "Controls",
+        contentLabel: "Content",
+        contentPlaceholder: "Enter a URL, text, or any content you want to turn into a QR Code",
+        contentNote: "A URL is the most common use case. Start there and the tool is already ready for demos and sharing.",
+        foregroundLabel: "Foreground",
+        backgroundLabel: "Background",
+        sizeLabel: "Size",
+        sizeUnit: "px",
+        filenameLabel: "Output Filename",
+        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenameNote: "The default filename includes the version and timestamp, and you can rename it anytime.",
+        logoLabel: "Logo",
+        logoModeLabel: "Logo Mode",
+        logoModeImage: "Image Logo",
+        logoModeText: "Text Logo",
+        logoShapeLabel: "Frame Shape",
+        logoShapeRect: "Rectangle",
+        logoShapeCircle: "Circle",
+        logoLine1Label: "Text Logo Line 1",
+        logoLine1Placeholder: "For example: FALO",
+        logoLine2Label: "Text Logo Line 2",
+        logoLine2Placeholder: "For example: AI",
+        logoLayoutLabel: "Text Layout",
+        logoLayoutSingle: "Single",
+        logoLayoutDouble: "Double",
+        logoTextSizeLabel: "Text Size",
+        logoTextColorLabel: "Text Color",
+        logoScaleLabel: "Logo Scale",
+        logoNone: "No logo added yet",
+        logoImageCurrent: "Current image logo: ",
+        logoTextCurrent: "Using text logo",
+        downloadPng: "Download PNG",
+        downloadJpg: "Download JPG",
+        downloadSvg: "Download SVG",
+        downloadPdf: "Download PDF",
+        clearLogo: "Remove Logo",
+        resetButton: "Reset",
+        previewTitle: "Live Preview",
+        previewHelper: "When you change content, colors, size, or logo, the preview updates immediately.",
+        previewTextLabel: "QR Code Text",
+        previewEmpty: "No content yet",
+        previewCanvasAria: "QR Code preview",
+        refreshButton: "Refresh manually",
+        footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
+        footerWebsiteLabel: "Force Cheng Web :",
+        footerVersion: "Version: v101",
+        statusReady: "Ready.",
+        statusRendering: "Updating preview...",
+        statusUpdated: "Updated.",
+        statusPngReady: "PNG is ready.",
+        statusJpgReady: "JPG is ready.",
+        statusSvgReady: "SVG is ready.",
+        statusPdfReady: "The PDF print window is open. Choose Save as PDF in your system print dialog.",
+        statusPdfBlocked: "The PDF window could not be opened. Please check if pop-ups are blocked.",
+        statusError: "Generation failed. Please check the input.",
+        statusLibMissing: "The QR library is still loading. Please wait a moment."
+      },
+      "ja": {
+        htmlLang: "ja",
+        ogLocale: "ja_JP",
+        title: "FALO QRコード生成ツール v101 | 完全機能の単一ファイルツール | Force Cheng × FALO",
+        description: "FALO QRコード生成ツール v101 は、ローカルで直接開ける単一 HTML ツールです。繁体字中国語、簡体字中国語、英語、日本語に対応し、Logo、色、サイズ、PNG、JPG、SVG、PDF 出力を提供します。",
+        keywords: "QRコード, QR Code Generator, 単一HTML, Logo QR, GitHub Pages, local-first, mobile-first, Force Cheng, FALO",
+        author: "Force Cheng × FALO",
+        robots: "index, follow, max-image-preview:large",
+        ogTitle: "FALO QRコード生成ツール v101 | 完全機能の単一ファイルツール",
+        ogDescription: "ローカルで直接開けて GitHub Pages にも配置できる単一ファイルの QRコードツール。多言語 UI、Logo、色調整、サイズ調整、PNG / JPG / SVG / PDF 出力に対応。",
+        twitterTitle: "FALO QRコード生成ツール v101 | 完全機能の単一ファイルツール",
+        twitterDescription: "入口はシンプル、機能はフル。多言語、Logo、複数形式ダウンロードに対応した単一ファイルの QRコードツール。",
+        badge: "Single File HTML · v101",
+        languageLabel: "言語",
+        heroTitle: "QRコード生成ツール",
+        heroSubtitle: "FALO モデル菜｜単一 HTML、ローカル実行も直接配置も可能",
+        chipOne: "単一 HTML",
+        chipTwo: "ローカル利用可",
+        chipThree: "GitHub / Google 配置可",
+        controlsTitle: "コントロール",
+        contentLabel: "内容",
+        contentPlaceholder: "URL、文字、または QRコードにしたい内容を入力してください",
+        contentNote: "最もよく使われるのは URL です。まずここから始めれば、教材や共有にもすぐ使えます。",
+        foregroundLabel: "前景色",
+        backgroundLabel: "背景色",
+        sizeLabel: "サイズ",
+        sizeUnit: "px",
+        filenameLabel: "出力ファイル名",
+        filenamePlaceholder: "falo-qrcode-v101-202603281130",
+        filenameNote: "初期ファイル名にはバージョンと時刻が自動で入ります。自由に変更できます。",
+        logoLabel: "Logo",
+        logoModeLabel: "Logo モード",
+        logoModeImage: "画像 Logo",
+        logoModeText: "文字 Logo",
+        logoShapeLabel: "フレーム形状",
+        logoShapeRect: "四角",
+        logoShapeCircle: "円形",
+        logoLine1Label: "文字 Logo 1行目",
+        logoLine1Placeholder: "例：FALO",
+        logoLine2Label: "文字 Logo 2行目",
+        logoLine2Placeholder: "例：AI",
+        logoLayoutLabel: "文字レイアウト",
+        logoLayoutSingle: "1行",
+        logoLayoutDouble: "2行",
+        logoTextSizeLabel: "文字サイズ",
+        logoTextColorLabel: "文字色",
+        logoScaleLabel: "Logo 比率",
+        logoNone: "まだ Logo はありません",
+        logoImageCurrent: "現在の画像 Logo：",
+        logoTextCurrent: "文字 Logo を使用中",
+        downloadPng: "PNG を保存",
+        downloadJpg: "JPG を保存",
+        downloadSvg: "SVG を保存",
+        downloadPdf: "PDF を保存",
+        clearLogo: "Logo を削除",
+        resetButton: "初期化",
+        previewTitle: "ライブプレビュー",
+        previewHelper: "内容、色、サイズ、Logo を変えると、右側のプレビューがすぐに更新されます。",
+        previewTextLabel: "QRコード文字",
+        previewEmpty: "まだ内容がありません",
+        previewCanvasAria: "QRコードのプレビュー",
+        refreshButton: "手動で更新",
+        footerCopyright: "© 2026 Force Cheng × FALO. All rights reserved.",
+        footerWebsiteLabel: "Force Cheng Web :",
+        footerVersion: "Version: v101",
+        statusReady: "準備完了。",
+        statusRendering: "プレビューを更新中...",
+        statusUpdated: "更新しました。",
+        statusPngReady: "PNG の準備ができました。",
+        statusJpgReady: "JPG の準備ができました。",
+        statusSvgReady: "SVG の準備ができました。",
+        statusPdfReady: "PDF 印刷ウィンドウを開きました。システムの印刷画面で PDF として保存してください。",
+        statusPdfBlocked: "PDF ウィンドウを開けませんでした。ポップアップブロックを確認してください。",
+        statusError: "生成に失敗しました。入力内容を確認してください。",
+        statusLibMissing: "QR ライブラリを読み込み中です。少しお待ちください。"
+      }
+    };
+
+    function getCopy() {
+      return i18n[state.currentLanguage] || i18n["zh-TW"];
+    }
+
+    function setStatusKey(key) {
+      state.lastStatusKey = key;
+      statusText.textContent = getCopy()[key] || "";
+    }
+
+    function getDefaultFilename() {
+      const now = new Date();
+      const pad = function(value) {
+        return String(value).padStart(2, "0");
+      };
+
+      return [
+        "falo-qrcode-v101-",
+        now.getFullYear(),
+        pad(now.getMonth() + 1),
+        pad(now.getDate()),
+        pad(now.getHours()),
+        pad(now.getMinutes())
+      ].join("");
+    }
+
+    function sanitizeFilename(rawName) {
+      const cleaned = (rawName || "")
+        .trim()
+        .replace(/[\\/:*?"<>|]/g, "-")
+        .replace(/\s+/g, "-");
+
+      return cleaned || getDefaultFilename();
+    }
+
+    function getFilenameWithExtension(extension) {
+      return sanitizeFilename(filenameInput.value) + "." + extension;
+    }
+
+    function getCurrentText() {
+      return textInput.value.trim() || " ";
+    }
+
+    function updatePreviewText() {
+      const copy = getCopy();
+      previewText.textContent = textInput.value.trim() || copy.previewEmpty;
+    }
+
+    function updateScaleLabels() {
+      const copy = getCopy();
+      sizeValue.textContent = sizeInput.value + " " + copy.sizeUnit;
+      logoScaleValue.textContent = logoScaleInput.value + "%";
+      logoTextSizeValue.textContent = logoTextSizeInput.value + "%";
+    }
+
+    function syncChoiceButtons(groupName, value) {
+      const row = document.querySelector('[data-choice-group="' + groupName + '"]');
+      if (!row) {
+        return;
+      }
+
+      row.querySelectorAll(".choice-button").forEach(function(button) {
+        button.classList.toggle("is-active", button.dataset.choiceValue === value);
+      });
+    }
+
+    function setChoiceValue(groupName, value) {
+      const input = document.getElementById(groupName);
+      if (!input) {
+        return;
+      }
+
+      input.value = value;
+      syncChoiceButtons(groupName, value);
+    }
+
+    function getLogoTextLines() {
+      const line1 = logoLine1Input.value.trim();
+      const line2 = logoLine2Input.value.trim();
+
+      if (logoLayoutInput.value === "single") {
+        const merged = [line1, line2].filter(Boolean).join(" ");
+        return merged ? [merged] : [];
+      }
+
+      return [line1, line2].filter(Boolean);
+    }
+
+    function getDoubleLogoColumns() {
+      return [logoLine1Input.value.trim(), logoLine2Input.value.trim()].filter(Boolean);
+    }
+
+    function getTextLogoColor() {
+      return logoTextColorInput.value || foregroundInput.value;
+    }
+
+    function getAdjustedTextSize(baseSize) {
+      return Math.max(10, Math.round(baseSize * (Number(logoTextSizeInput.value) / 100)));
+    }
+
+    function hasTextLogo() {
+      return getLogoTextLines().length > 0;
+    }
+
+    function shouldDrawImageLogo() {
+      return logoModeInput.value === "image" && !!state.logoImage;
+    }
+
+    function shouldDrawTextLogo() {
+      return logoModeInput.value === "text" && hasTextLogo();
+    }
+
+    function updateLogoLabel() {
+      const copy = getCopy();
+
+      if (shouldDrawImageLogo()) {
+        logoName.textContent = copy.logoImageCurrent + state.logoFilename;
+        return;
+      }
+
+      if (shouldDrawTextLogo()) {
+        logoName.textContent = copy.logoTextCurrent;
+        return;
+      }
+
+      logoName.textContent = copy.logoNone;
+    }
+
+    function roundedRect(ctx, x, y, width, height, radius) {
+      const safeRadius = Math.min(radius, width / 2, height / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + safeRadius, y);
+      ctx.arcTo(x + width, y, x + width, y + height, safeRadius);
+      ctx.arcTo(x + width, y + height, x, y + height, safeRadius);
+      ctx.arcTo(x, y + height, x, y, safeRadius);
+      ctx.arcTo(x, y, x + width, y, safeRadius);
+      ctx.closePath();
+    }
+
+    function getLogoPlacement(size) {
+      const scale = Number(logoScaleInput.value) / 100;
+      const logoSize = Math.round(size * scale);
+      const padding = Math.max(8, Math.round(logoSize * 0.14));
+      const plateSize = logoSize + padding * 2;
+      const x = Math.round((size - plateSize) / 2);
+      const y = Math.round((size - plateSize) / 2);
+      return { x, y, logoSize, padding, plateSize };
+    }
+
+    function drawLogoPlate(ctx, placement) {
+      const isCircle = logoShapeInput.value === "circle";
+      const radius = isCircle ? placement.plateSize / 2 : Math.max(14, placement.plateSize * 0.18);
+
+      ctx.save();
+      if (isCircle) {
+        ctx.beginPath();
+        ctx.arc(
+          placement.x + placement.plateSize / 2,
+          placement.y + placement.plateSize / 2,
+          placement.plateSize / 2,
+          0,
+          Math.PI * 2
+        );
+      } else {
+        roundedRect(ctx, placement.x, placement.y, placement.plateSize, placement.plateSize, radius);
+      }
+      ctx.fillStyle = "#ffffff";
+      ctx.shadowColor = "rgba(108, 89, 178, 0.14)";
+      ctx.shadowBlur = 18;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      return { isCircle: isCircle };
+    }
+
+    function clipLogoInnerShape(ctx, placement, isCircle) {
+      if (isCircle) {
+        ctx.beginPath();
+        ctx.arc(
+          placement.x + placement.plateSize / 2,
+          placement.y + placement.plateSize / 2,
+          placement.logoSize / 2,
+          0,
+          Math.PI * 2
+        );
+      } else {
+        roundedRect(
+          ctx,
+          placement.x + placement.padding,
+          placement.y + placement.padding,
+          placement.logoSize,
+          placement.logoSize,
+          Math.max(12, placement.logoSize * 0.16)
+        );
+      }
+      ctx.clip();
+    }
+
+    function drawImageLogo(ctx, size) {
+      if (!shouldDrawImageLogo()) {
+        return;
+      }
+
+      const placement = getLogoPlacement(size);
+      const plate = drawLogoPlate(ctx, placement);
+      clipLogoInnerShape(ctx, placement, plate.isCircle);
+      ctx.drawImage(
+        state.logoImage,
+        placement.x + placement.padding,
+        placement.y + placement.padding,
+        placement.logoSize,
+        placement.logoSize
+      );
+      ctx.restore();
+    }
+
+    function drawTextLogo(ctx, size) {
+      if (!shouldDrawTextLogo()) {
+        return;
+      }
+
+      const placement = getLogoPlacement(size);
+      const plate = drawLogoPlate(ctx, placement);
+      const centerX = placement.x + placement.plateSize / 2;
+      const centerY = placement.y + placement.plateSize / 2;
+
+      clipLogoInnerShape(ctx, placement, plate.isCircle);
+      ctx.fillStyle = getTextLogoColor();
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      if (logoLayoutInput.value === "double") {
+        const lines = getDoubleLogoColumns();
+        const doubleFont = getAdjustedTextSize(Math.max(12, Math.round(placement.logoSize * 0.18)));
+        const gap = Math.max(18, Math.round(doubleFont * 1.55));
+        ctx.font = "800 " + doubleFont + "px Iansui, Noto Sans TC, PingFang TC, Microsoft JhengHei, sans-serif";
+
+        if (lines.length <= 1) {
+          ctx.fillText(lines[0] || "", centerX, centerY, placement.logoSize * 0.88);
+        } else {
+          ctx.fillText(lines[0], centerX, centerY - gap / 2, placement.logoSize * 0.88);
+          ctx.fillText(lines[1], centerX, centerY + gap / 2, placement.logoSize * 0.88);
+        }
+      } else {
+        const lines = getLogoTextLines();
+        const baseSize = getAdjustedTextSize(Math.max(16, Math.round(placement.logoSize * 0.28)));
+        ctx.font = "800 " + baseSize + "px Iansui, Noto Sans TC, PingFang TC, Microsoft JhengHei, sans-serif";
+        ctx.fillText(lines[0], centerX, centerY, placement.logoSize * 0.9);
+      }
+
+      ctx.restore();
+    }
+
+    function drawLogo(ctx, size) {
+      if (shouldDrawImageLogo()) {
+        drawImageLogo(ctx, size);
+        return;
+      }
+
+      if (shouldDrawTextLogo()) {
+        drawTextLogo(ctx, size);
+      }
+    }
+
+    function updateStructuredData(copy) {
+      structuredData.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "FALO QR Code Generator",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "url": canonicalLink.href,
+        "description": copy.description,
+        "author": {
+          "@type": "Organization",
+          "name": copy.author
+        },
+        "creator": {
+          "@type": "Organization",
+          "name": "Force Cheng × FALO"
+        },
+        "inLanguage": copy.htmlLang,
+        "keywords": copy.keywords
+      });
+    }
+
+    function applyLanguage(language) {
+      const copy = i18n[language] || i18n["zh-TW"];
+      state.currentLanguage = language;
+
+      document.documentElement.lang = copy.htmlLang;
+      document.title = copy.title;
+      metaDescription.setAttribute("content", copy.description);
+      metaKeywords.setAttribute("content", copy.keywords);
+      metaAuthor.setAttribute("content", copy.author);
+      metaRobots.setAttribute("content", copy.robots);
+      ogLocale.setAttribute("content", copy.ogLocale);
+      ogTitle.setAttribute("content", copy.ogTitle);
+      ogDescription.setAttribute("content", copy.ogDescription);
+      ogUrl.setAttribute("content", canonicalLink.href);
+      ogSiteName.setAttribute("content", "Force Cheng × FALO Tools");
+      twitterTitle.setAttribute("content", copy.twitterTitle);
+      twitterDescription.setAttribute("content", copy.twitterDescription);
+      themeColor.setAttribute("content", "#d8f1dc");
+      updateStructuredData(copy);
+
+      document.querySelectorAll("[data-i18n]").forEach(function(element) {
+        const key = element.dataset.i18n;
+        if (copy[key]) {
+          element.textContent = copy[key];
+        }
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(function(element) {
+        const key = element.dataset.i18nPlaceholder;
+        if (copy[key]) {
+          element.setAttribute("placeholder", copy[key]);
+        }
+      });
+
+      languageButtons.forEach(function(button) {
+        button.classList.toggle("is-active", button.dataset.lang === language);
+      });
+
+      canvas.setAttribute("aria-label", copy.previewCanvasAria);
+      updatePreviewText();
+      updateScaleLabels();
+      updateLogoLabel();
+      setStatusKey(state.lastStatusKey);
+
+      try {
+        window.localStorage.setItem("falo-qrcode-language", language);
+      } catch (error) {
+        // Ignore storage errors in local-only environments.
+      }
+    }
+
+    function renderQR() {
+      if (!window.QRCode || typeof window.QRCode.toCanvas !== "function") {
+        setStatusKey("statusLibMissing");
+        return;
+      }
+
+      const text = getCurrentText();
+      const size = Number(sizeInput.value);
+      const renderVersion = ++state.renderVersion;
+
+      canvas.width = size;
+      canvas.height = size;
+      updatePreviewText();
+      updateScaleLabels();
+      updateLogoLabel();
+      setStatusKey("statusRendering");
+
+      window.QRCode.toCanvas(
+        canvas,
+        text,
+        {
+          width: size,
+          margin: 2,
+          errorCorrectionLevel: "H",
+          color: {
+            dark: foregroundInput.value,
+            light: backgroundInput.value
+          }
+        },
+        function(error) {
+          if (renderVersion !== state.renderVersion) {
+            return;
+          }
+
+          if (error) {
+            setStatusKey("statusError");
+            return;
+          }
+
+          drawLogo(canvas.getContext("2d"), size);
+          setStatusKey("statusUpdated");
+        }
+      );
+    }
+
+    function scheduleRender() {
+      updatePreviewText();
+      updateScaleLabels();
+      updateLogoLabel();
+      window.clearTimeout(state.renderTimer);
+      state.renderTimer = window.setTimeout(renderQR, 60);
+    }
+
+    function handleLogoChange(event) {
+      const file = event.target.files[0];
+
+      if (!file) {
+        state.logoImage = null;
+        state.logoFilename = "";
+        state.logoDataUrl = "";
+        scheduleRender();
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(loadEvent) {
+        const image = new Image();
+        image.onload = function() {
+          setChoiceValue("logo-mode", "image");
+          state.logoImage = image;
+          state.logoFilename = file.name;
+          state.logoDataUrl = loadEvent.target.result;
+          scheduleRender();
+        };
+        image.src = loadEvent.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function downloadRaster(mimeType, extension, statusKey) {
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL(mimeType, 0.92);
+      link.download = getFilenameWithExtension(extension);
+      link.click();
+      setStatusKey(statusKey);
+    }
+
+    function buildSvgMarkup(callback) {
+      if (!window.QRCode || typeof window.QRCode.toString !== "function") {
+        setStatusKey("statusLibMissing");
+        return;
+      }
+
+      const text = getCurrentText();
+      const size = Number(sizeInput.value);
+
+      window.QRCode.toString(
+        text,
+        {
+          type: "svg",
+          width: size,
+          margin: 2,
+          errorCorrectionLevel: "H",
+          color: {
+            dark: foregroundInput.value,
+            light: backgroundInput.value
+          }
+        },
+        function(error, svgMarkup) {
+          if (error) {
+            setStatusKey("statusError");
+            return;
+          }
+
+          if (!shouldDrawImageLogo() && !shouldDrawTextLogo()) {
+            callback(svgMarkup);
+            return;
+          }
+
+          const placement = getLogoPlacement(size);
+          const isCircle = logoShapeInput.value === "circle";
+          const plateTag = isCircle
+            ? '<circle cx="' + (placement.x + placement.plateSize / 2) + '" cy="' + (placement.y + placement.plateSize / 2) + '" r="' + (placement.plateSize / 2) + '" fill="#ffffff"></circle>'
+            : '<rect x="' + placement.x + '" y="' + placement.y + '" width="' + placement.plateSize + '" height="' + placement.plateSize + '" rx="' + Math.max(14, placement.plateSize * 0.18) + '" ry="' + Math.max(14, placement.plateSize * 0.18) + '" fill="#ffffff"></rect>';
+          const clipShape = isCircle
+            ? '<circle cx="' + (placement.x + placement.plateSize / 2) + '" cy="' + (placement.y + placement.plateSize / 2) + '" r="' + (placement.logoSize / 2) + '"></circle>'
+            : '<rect x="' + (placement.x + placement.padding) + '" y="' + (placement.y + placement.padding) + '" width="' + placement.logoSize + '" height="' + placement.logoSize + '" rx="' + Math.max(12, placement.logoSize * 0.16) + '" ry="' + Math.max(12, placement.logoSize * 0.16) + '"></rect>';
+          const logoClipId = "logo-clip-" + Date.now();
+          let overlayContent = "";
+
+          if (shouldDrawImageLogo()) {
+            overlayContent = [
+              '<clipPath id="' + logoClipId + '">',
+              clipShape,
+              '</clipPath>',
+              '<image href="' + state.logoDataUrl + '" x="' + (placement.x + placement.padding) + '" y="' + (placement.y + placement.padding) + '" width="' + placement.logoSize + '" height="' + placement.logoSize + '" preserveAspectRatio="xMidYMid meet" clip-path="url(#' + logoClipId + ')"></image>'
+            ].join("");
+          } else {
+            const lines = getLogoTextLines();
+            const columns = getDoubleLogoColumns();
+            const centerX = placement.x + placement.plateSize / 2;
+            const centerY = placement.y + placement.plateSize / 2;
+            const escapeXml = function(value) {
+              return value
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+            };
+
+            if (logoLayoutInput.value === "double") {
+              const fontSize = getAdjustedTextSize(Math.max(12, Math.round(placement.logoSize * 0.18)));
+              const gap = Math.max(18, Math.round(fontSize * 1.55));
+              overlayContent = columns.length <= 1
+                ? '<text x="' + centerX + '" y="' + centerY + '" text-anchor="middle" dominant-baseline="middle" font-size="' + fontSize + '" font-weight="800" fill="' + getTextLogoColor() + '">' + escapeXml(columns[0] || "") + '</text>'
+                : [
+                    '<text x="' + centerX + '" y="' + (centerY - gap / 2) + '" text-anchor="middle" dominant-baseline="middle" font-size="' + fontSize + '" font-weight="800" fill="' + getTextLogoColor() + '">' + escapeXml(columns[0]) + '</text>',
+                    '<text x="' + centerX + '" y="' + (centerY + gap / 2) + '" text-anchor="middle" dominant-baseline="middle" font-size="' + fontSize + '" font-weight="800" fill="' + getTextLogoColor() + '">' + escapeXml(columns[1]) + '</text>'
+                  ].join("");
+            } else {
+              const fontSize = getAdjustedTextSize(Math.max(16, Math.round(placement.logoSize * 0.28)));
+              overlayContent = '<text x="' + centerX + '" y="' + centerY + '" text-anchor="middle" dominant-baseline="middle" font-size="' + fontSize + '" font-weight="800" fill="' + getTextLogoColor() + '">' + escapeXml(lines[0]) + '</text>';
+            }
+          }
+
+          const overlay = ['<g>', plateTag, overlayContent, '</g>'].join("");
+          callback(svgMarkup.replace("</svg>", overlay + "</svg>"));
+        }
+      );
+    }
+
+    function downloadSVG() {
+      buildSvgMarkup(function(svgMarkup) {
+        const blob = new Blob([svgMarkup], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = getFilenameWithExtension("svg");
+        link.click();
+        window.setTimeout(function() {
+          URL.revokeObjectURL(url);
+        }, 1000);
+        setStatusKey("statusSvgReady");
+      });
+    }
+
+    function downloadPDF() {
+      const popup = window.open("", "_blank", "width=960,height=960");
+
+      if (!popup) {
+        setStatusKey("statusPdfBlocked");
+        return;
+      }
+
+      popup.document.title = getFilenameWithExtension("pdf");
+      popup.document.write(
+        '<!doctype html><html><head><meta charset="utf-8"><title>' + getFilenameWithExtension("pdf") + '</title><style>' +
+        'body{margin:0;padding:32px;font-family:Arial,sans-serif;text-align:center;background:#ffffff;color:#2e241d;}' +
+        'img{max-width:100%;width:520px;height:auto;display:block;margin:0 auto 18px;}' +
+        'p{margin:0 auto;max-width:720px;line-height:1.6;word-break:break-word;}' +
+        'small{display:block;margin-top:12px;color:#6f6a88;}' +
+        '</style></head><body>' +
+        '<img src="' + canvas.toDataURL("image/png") + '" alt="QR Code">' +
+        '<p>' + previewText.textContent.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</p>' +
+        '<small>© 2026 Force Cheng × FALO · https://force.formosa-ai.com</small>' +
+        '<script>window.onload=function(){setTimeout(function(){window.print();},200);};<' + '/script>' +
+        '</body></html>'
+      );
+      popup.document.close();
+      setStatusKey("statusPdfReady");
+    }
+
+    function resetAll() {
+      textInput.value = defaults.text;
+      foregroundInput.value = defaults.foreground;
+      backgroundInput.value = defaults.background;
+      sizeInput.value = defaults.size;
+      filenameInput.value = getDefaultFilename();
+      logoScaleInput.value = defaults.logoScale;
+      logoTextSizeInput.value = defaults.logoTextSize;
+      logoTextColorInput.value = defaults.logoTextColor;
+      setChoiceValue("logo-mode", defaults.logoMode);
+      setChoiceValue("logo-shape", defaults.logoShape);
+      logoLine1Input.value = defaults.logoLine1;
+      logoLine2Input.value = defaults.logoLine2;
+      setChoiceValue("logo-layout", defaults.logoLayout);
+      logoFileInput.value = "";
+      state.logoImage = null;
+      state.logoFilename = "";
+      state.logoDataUrl = "";
+      scheduleRender();
+    }
+
+    [
+      textInput,
+      foregroundInput,
+      backgroundInput,
+      sizeInput,
+      filenameInput,
+      logoScaleInput,
+      logoTextSizeInput,
+      logoTextColorInput,
+      logoModeInput,
+      logoShapeInput,
+      logoLine1Input,
+      logoLine2Input,
+      logoLayoutInput
+    ].forEach(function(element) {
+      element.addEventListener("input", scheduleRender);
+      element.addEventListener("change", scheduleRender);
+    });
+
+    logoLine1Input.addEventListener("input", function() {
+      if (logoLine1Input.value.trim() || logoLine2Input.value.trim()) {
+        setChoiceValue("logo-mode", "text");
+      }
+      scheduleRender();
+    });
+
+    logoLine2Input.addEventListener("input", function() {
+      if (logoLine1Input.value.trim() || logoLine2Input.value.trim()) {
+        setChoiceValue("logo-mode", "text");
+      }
+      scheduleRender();
+    });
+
+    choiceRows.forEach(function(row) {
+      row.addEventListener("click", function(event) {
+        const button = event.target.closest(".choice-button");
+        if (!button) {
+          return;
+        }
+
+        const groupName = row.dataset.choiceGroup;
+        setChoiceValue(groupName, button.dataset.choiceValue);
+        scheduleRender();
+      });
+    });
+
+    languageButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        applyLanguage(button.dataset.lang);
+      });
+    });
+
+    logoFileInput.addEventListener("change", handleLogoChange);
+    downloadPngButton.addEventListener("click", function() {
+      downloadRaster("image/png", "png", "statusPngReady");
+    });
+    downloadJpgButton.addEventListener("click", function() {
+      downloadRaster("image/jpeg", "jpg", "statusJpgReady");
+    });
+    downloadSvgButton.addEventListener("click", downloadSVG);
+    downloadPdfButton.addEventListener("click", downloadPDF);
+    refreshButton.addEventListener("click", scheduleRender);
+    clearLogoButton.addEventListener("click", function() {
+      logoFileInput.value = "";
+      setChoiceValue("logo-mode", "image");
+      logoLine1Input.value = "";
+      logoLine2Input.value = "";
+      setChoiceValue("logo-layout", defaults.logoLayout);
+      state.logoImage = null;
+      state.logoFilename = "";
+      state.logoDataUrl = "";
+      scheduleRender();
+    });
+    resetButton.addEventListener("click", resetAll);
+
+    function init() {
+      let savedLanguage = "zh-TW";
+      try {
+        savedLanguage = window.localStorage.getItem("falo-qrcode-language") || "zh-TW";
+      } catch (error) {
+        savedLanguage = "zh-TW";
+      }
+
+      filenameInput.value = getDefaultFilename();
+      setChoiceValue("logo-mode", defaults.logoMode);
+      setChoiceValue("logo-shape", defaults.logoShape);
+      setChoiceValue("logo-layout", defaults.logoLayout);
+      applyLanguage(i18n[savedLanguage] ? savedLanguage : "zh-TW");
+      scheduleRender();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  </script>
+</body>
+</html>
