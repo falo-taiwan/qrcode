@@ -1,13 +1,20 @@
-# QRCode Tool v101
+# QRCode Tool v102
 
 這個資料夾是 QR Code 工具的獨立版本。
 
 版本：
 
 - `v101`
-- 意義：`v1.01`
+  - 原版保留
+- `v102`
+  - 意義：`v1.02`
+  - 小幅升級版
 
 主檔：
+
+- [falo-qrcode-v102.html](/Users/force/AI-CodeX/tools/qrcode/falo-qrcode-v102.html)
+
+保留版本：
 
 - [falo-qrcode-v101.html](/Users/force/AI-CodeX/tools/qrcode/falo-qrcode-v101.html)
 
@@ -15,7 +22,7 @@
 
 - 維持單檔 HTML，可本機直接開啟
 - 採 `single-file first / local-first / mobile-first`
-- 主檔改為版本化命名：`falo-qrcode-v101.html`
+- 主檔改為版本化命名：`falo-qrcode-v102.html`
 - 支援多語系：繁體中文、簡體中文、英文、日文
 - 頁首改為極簡入口文案，功能區保留完整專業工具能力
 - 補上 SEO / GEO：`title`、`description`、`keywords`、`author`、`robots`
@@ -23,6 +30,11 @@
 - 加入簡單 `JSON-LD`
 - 視覺改為綠 / 黃 / 紫的馬卡龍風格
 - 更新品牌與版權資訊
+- `v102` 新增：
+  - 預設尺寸改為依視窗寬度計算
+  - 前景色預設改為深灰
+  - 背景色預設改為純白
+  - 預設網址改為 `https://www.google.com/`
 
 目前功能：
 
